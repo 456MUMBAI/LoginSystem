@@ -51,7 +51,6 @@ if mycon.is_connected():
     verify()
 
 
-print('hello')
 
 
 
