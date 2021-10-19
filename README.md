@@ -1,3 +1,3 @@
 # LoginSystem
-RITU CS PROJECT
-HELLO this is my first project on github.
+RITU & TANYA CS PROJECT (CLASS XII)
+HELLO this is our first project: "LOGIN SYSTEM" on github.
