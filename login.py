@@ -39,3 +39,4 @@ if mycon.is_connected():
                             print('Please enter valid choice')
                             menu()
 
+print('hi there')
