@@ -1,4 +1,4 @@
-#login file
+# login file
 import mysql.connector as ms
 
 mycon = ms.connect(host='db4free.net', user='clairie', passwd='education', charset='utf8', database='skytouch')
@@ -6,7 +6,7 @@ if mycon.is_connected():
     print('connected!')
     mycursor = mycon.cursor()
     mycursor.execute('select * from login_info;')
-    login_data=mycursor.fetchall()
+    login_data = mycursor.fetchall()
 
 
     def change_pswd():
@@ -33,31 +33,27 @@ if mycon.is_connected():
                 break
         else:
             print('No such VC number exists. ')
-            ch=int(input('Press 1 to re-enter VC number. Else press any key to continue:  '))
-            if ch==1:
+            ch = int(input('Press 1 to re-enter VC number. Else press any key to continue:  '))
+            if ch == 1:
                 change_pswd()
             else:
                 pass
 
+
     def verify():
         ''' to verify login information of the user.'''
         print('##LOGIN DETAILS##')
-        user_name=input('USERNAME: ')
-        pswd=input('PASSWORD: ')
-        t=(user_name,pswd)
+        user_name = input('USERNAME: ')
+        pswd = input('PASSWORD: ')
+        t = (user_name, pswd)
         if t in login_data:
             print(f'WELCOME {user_name}! ')
         else:
             print('either username or password incorrect.')
-            forgot=int(input('Forgot password? Press 0 to change password. Else press any key to continue. '))
-            if forgot!=0:
+            forgot = int(input('Forgot password? Press 0 to change password. Else press any key to continue. '))
+            if forgot != 0:
                 verify()
             else:
                 change_pswd()
-
-
-
-
-
 
 print('hi there')

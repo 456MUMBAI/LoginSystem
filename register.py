@@ -116,6 +116,8 @@ if mycon.is_connected():
             else:
                 break
         return fav_place
+
+
     def color():
         """to input color"""
         while True:
@@ -127,6 +129,8 @@ if mycon.is_connected():
             else:
                 break
         return fav_color
+
+
     def pet():
         """to input pet"""
         while True:
