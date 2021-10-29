@@ -1,5 +1,4 @@
-
-#registration file
+# registration file
 import mysql.connector as ms
 
 mycon = ms.connect(host='db4free.net', user='clairie', passwd='education', charset='utf8', database='skytouch')
@@ -8,14 +7,17 @@ if mycon.is_connected():
 
 import mysql.connector as ms
 import random
-mycon=ms.connect(host="db4free.net",user="clairie",passwd="education",charset="utf8",database="skytouch")
+
+mycon = ms.connect(host="db4free.net", user="clairie", passwd="education", charset="utf8", database="skytouch")
 if mycon.is_connected():
     print("connected")
-    mycursor=mycon.cursor()
+    mycursor = mycon.cursor()
     mycursor.execute("select * from reg")
-    data=mycursor.fetchall()
+    data = mycursor.fetchall()
+
+
     def mobile():
-        #global mobile
+        """to input mobile no. of user."""
         loop1 = "y"
         while loop1 == "y":
             mb = input("enter your mobile number=")
@@ -26,23 +28,25 @@ if mycon.is_connected():
 
                     return mobile
             else:
-                print("invalid number")
+                print("invalid mobile number")
                 loop1 = "y"
+
+
     def username():
-        #global user
+        """to input username of user"""
         loop2 = "y"
         while loop2 == "y":
             uname = input("enter your username=")
-            length=len(uname)
+            length = len(uname)
 
             for i in data:
                 if uname == i[2]:
-                    print("this username already exist")
+                    print("This username already exists")
                     loop2 = "y"
 
                 else:
                     if length == 0:
-                        print("enter a valid username")
+                        print("Enter a valid username")
                         loop2 = "y"
                     else:
                         user = uname
@@ -50,12 +54,8 @@ if mycon.is_connected():
                         return user
 
 
-
-
-
-
     def password():
-        #global passwd
+
         loop3 = "y"
         while loop3 == "y":
             pswd = input("enter a password=")
@@ -65,9 +65,9 @@ if mycon.is_connected():
                     passwd = pswd
                     loop3 = "n"
                     return passwd
-                elif length>20:
+                elif length > 20:
                     print("enter a password less than 20 characters")
-                    loop3="y"
+                    loop3 = "y"
                 else:
                     print("password should consist of only digits and alphabets")
                     loop3 = "y"
@@ -75,8 +75,10 @@ if mycon.is_connected():
             else:
                 print("password should not be less than 8 characters")
                 loop3 = "y"
+
+
     def vc():
-        #global vc
+        """to generate unique vc number for every new customer."""
         vt = random.randrange(100000, 100000000000)
         for i in data:
             if vt == i[0]:
@@ -85,7 +87,10 @@ if mycon.is_connected():
             else:
                 vc = vt
                 return vc
+
+
     def name():
+        """to input name of the user"""
         loop = "y"
         while loop == "y":
             name = input("enter your fullname=")
@@ -100,35 +105,30 @@ if mycon.is_connected():
                 return name
 
 
-
-
     choice = "y"
-    while choice=="y":
-         cc=int(input("enter your country code"))
-         if cc==91:
-             name=name()
+    while choice == "y":
+        cc = int(input("enter your country code"))
+        if cc == 91:
+            name = name()
+            mobile = mobile()
+            user = username()
 
-             mobile=mobile()
-             user=username()
+            print("password should not be less than 8 characters and more than 20 characters")
+            print("password should consist of only digits and alphabets")
+            print("no special characters allowed")
+            passwd = password()
+            vc = vc()
 
+            mail = input("enter email=")
 
-             print("password should not be less than 8 characters and more than 20 characters")
-             print("password should consist of only digits and alphabets")
-             print("no special characters allowed")
-             passwd=password()
-             vc=vc()
+            query = "insert into reg values('{0}','{1}','{2}','{3}','{4}','{5}')".format(vc, name, user, mobile, passwd,
+                                                                                         mail)
+            mycursor.execute(query)
+            mycon.commit()
 
-
-             mail=input("enter email=")
-
-
-             query="insert into reg values('{0}','{1}','{2}','{3}','{4}','{5}')".format(vc,name,user,mobile,passwd,mail)
-             mycursor.execute(query)
-             mycon.commit()
-
-             print("do you want to add another user(y/n)")
-             choice=input("enter=")
+            print("do you want to add another user(y/n)")
+            choice = input("enter=")
 
 
-         else:
-             print("DTH service available only in india")
+        else:
+            print("DTH service available only in india")
