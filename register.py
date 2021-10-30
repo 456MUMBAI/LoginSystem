@@ -38,17 +38,18 @@ if mycon.is_connected():
                 if uname == i[2]:
                     print("This username already exists")
                     loop2 = "y"
+            if length == 0:
+                print("Enter a valid username")
 
-                else:
-                    if length == 0:
-                        print("Enter a valid username")
-                        loop2 = "y"
-                    elif uname.isspace():
-                        print("please enter a valid username ")
-                    else:
-                        user = uname
-                        loop2 = "n"
-                        return user
+            elif uname.isspace():
+                print("please enter a valid username ")
+
+            else:
+                user = uname
+                loop2 = "n"
+                return user
+
+
 
 
     def password():

@@ -57,3 +57,4 @@ if mycon.is_connected():
                 change_pswd()
 
 print('hi there')
+verify()
