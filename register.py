@@ -43,6 +43,8 @@ if mycon.is_connected():
                     if length == 0:
                         print("Enter a valid username")
                         loop2 = "y"
+                    elif uname.isspace():
+                        print("please enter a valid username ")
                     else:
                         user = uname
                         loop2 = "n"
@@ -92,7 +94,7 @@ if mycon.is_connected():
             if len(name) == 0:
                 print("Please enter a valid name")
                 loop = "y"
-            elif name == " ":
+            elif name.isspace():
                 print("Please enter a valid name")
                 loop = "y"
             else:
