@@ -1,6 +1,7 @@
 # registration file
-# import login
+
 import main
+#import login
 
 
 def mobile():
@@ -152,4 +153,4 @@ def fun():
     main.mycursor.execute(query)
     main.mycon.commit()
     print('##THANK YOU FOR REGISTERING WITH US!!##')
-print('hi')
+

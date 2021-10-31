@@ -32,8 +32,15 @@ def change_pswd():
 def verify():
     ''' to verify login information of the user.'''
     print('##LOGIN DETAILS##')
-    user_name = input('USERNAME: ')
-    pswd = input('PASSWORD: ')
+    while True:
+        user_name = input('USERNAME: ')
+        if len(user_name)==0:
+            print("please enter a valid  username")
+        else:
+            pswd = input('PASSWORD: ')
+            break
+
+
     t = (user_name, pswd)
     if t in main.login_data:
         print(f'WELCOME {user_name}! ')
@@ -44,4 +51,3 @@ def verify():
             change_pswd()
         else:
             verify()
-print('hi')
