@@ -45,4 +45,15 @@ def verify():
         if forgot == '0':
             change_pswd()
         else:
+
+            print('either username or password incorrect.')
+            forgot = int(input('Forgot password? Press 0 to change password. Else press any key to continue. '))
+            if forgot != 0:
+                verify()
+            else:
+                change_pswd()
+
+print('hi there')
+verify()
+
             verify()
