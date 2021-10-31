@@ -133,6 +133,34 @@ def pet():
             break
     return fav_pet
 
+def mail():
+    while True:
+        print("please note that for the registration process you are required to enter your G-mail")
+        import os
+        import math
+        import random
+        import smtplib
+
+        digits = "0123456789"
+        OTP = ""
+        for i in range(6):
+            OTP += digits[math.floor(random.random() * 10)]
+        otp = OTP + " is your OTP"
+        msg = otp
+        s = smtplib.SMTP('smtp.gmail.com', 587)
+        s.starttls()
+        s.login("Your Gmail Account", "You app password")
+        mail = input("Enter your email: ")
+        s.sendmail('&&&&&&&&&&&', mail, msg)
+        a = input("Enter Your OTP >>: ")
+        if a == OTP:
+            print("Verified")
+            return mail
+            break
+        else:
+            print("Please Check your OTP again")
+
+
 
 def fun():
     print('##REGISTRATION WINDOW##')
@@ -141,7 +169,7 @@ def fun():
     uname = username()
     passwd = password()
     mb = mobile()
-    mail = input("Enter email= ")
+    mail=mail()
     print(
         'Please provide the following details that will be required to change your password if you forget it in future.')
     fav_place = place()
