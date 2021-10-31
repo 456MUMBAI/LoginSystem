@@ -18,4 +18,4 @@ elif ch=='2':
     register.fun()
 
 
-print('hi')
+print("hello")
