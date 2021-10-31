@@ -1,11 +1,13 @@
 # registration file
 # import login
 import main
+
+
 def mobile():
     """to input mobile no. of user."""
     loop1 = "y"
     while loop1 == "y":
-        mb=input("Enter your mobile number= ")
+        mb = input("Enter your mobile number= ")
         if len(mb) == 10:
             if mb.isdigit():
                 mobile = mb
@@ -21,7 +23,7 @@ def username():
     """to input username of user"""
     loop2 = "y"
     while loop2 == "y":
-        uname=input("Enter your username= ")
+        uname = input("Enter your username= ")
         length = len(uname)
 
         for i in main.reg_data:
@@ -46,7 +48,7 @@ def password():
     print("No special characters allowed")
     loop3 = "y"
     while loop3 == "y":
-        pswd=input("Enter a password= ")
+        pswd = input("Enter a password= ")
         length = len(pswd)
         if length >= 8:
             if pswd.isalnum():
@@ -63,6 +65,8 @@ def password():
         else:
             print("Password should not be less than 8 characters")
             loop3 = "y"
+
+
 def vc():
     """To generate unique vc number for every new customer."""
     import random
@@ -78,7 +82,7 @@ def name():
     """To input name of the user"""
     loop = "y"
     while loop == "y":
-        name=input("Enter your fullname= ")
+        name = input("Enter your fullname= ")
         if len(name) == 0:
             print("Please enter a valid name.")
             loop = "y"
@@ -93,7 +97,7 @@ def name():
 def place():
     """to input place"""
     while True:
-        fav_place=input('Enter your favourite place: ')
+        fav_place = input('Enter your favourite place: ')
         if len(fav_place) == 0:
             print('Please enter valid favourite place.')
         elif fav_place.isspace():
@@ -106,7 +110,7 @@ def place():
 def color():
     """to input color"""
     while True:
-        fav_color=input('Enter your favourite color: ')
+        fav_color = input('Enter your favourite color: ')
         if len(fav_color) == 0:
             print('Please enter valid favourite color.')
         elif fav_color.isspace():
@@ -119,7 +123,7 @@ def color():
 def pet():
     """to input pet"""
     while True:
-        fav_pet=input('Enter your favourite pet: ')
+        fav_pet = input('Enter your favourite pet: ')
         if len(fav_pet) == 0:
             print('Please enter valid favourite pet.')
         elif fav_pet.isspace():
@@ -128,23 +132,24 @@ def pet():
             break
     return fav_pet
 
-def fun():
 
+def fun():
     print('##REGISTRATION WINDOW##')
     print('Dear Customer, please note our DTH service is only available in INDIA.')
-    nm=name()
-    uname=username()
-    passwd=password()
-    mb=mobile()
-    mail=input("Enter email= ")
-    print('Please provide the following details that will be required to change your password if you forget it in future.')
-    fav_place=place()
-    fav_color=color()
-    fav_pet=pet()
-    VC=vc()
+    nm = name()
+    uname = username()
+    passwd = password()
+    mb = mobile()
+    mail = input("Enter email= ")
+    print(
+        'Please provide the following details that will be required to change your password if you forget it in future.')
+    fav_place = place()
+    fav_color = color()
+    fav_pet = pet()
+    VC = vc()
 
     query = f"insert into reg values('{VC}','{nm}','{uname}','{mb}','{passwd}','{mail}', '{fav_place}','{fav_color}','{fav_pet}')"
     main.mycursor.execute(query)
     main.mycon.commit()
     print('##THANK YOU FOR REGISTERING WITH US!!##')
-
+print('hi')

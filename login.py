@@ -1,9 +1,7 @@
-
-
 import main
 
-def change_pswd():
 
+def change_pswd():
     VC = input('Enter your VC number= ')
     for i in main.reg_data:
         if VC in i[0]:
@@ -46,3 +44,4 @@ def verify():
             change_pswd()
         else:
             verify()
+print('hi')
