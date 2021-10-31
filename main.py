@@ -16,3 +16,6 @@ if ch=='1' :
     login.verify()
 elif ch=='2':
     register.fun()
+
+
+print('hi')
