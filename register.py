@@ -168,7 +168,7 @@ def fun():
     uname = username()
     passwd = password()
     mb = mobile()
-    mail=print("enter your e-mIL")
+    mail=input("enter your e-maiL")
     #mail=mail()
 
     print(
