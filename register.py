@@ -26,20 +26,24 @@ def username():
     while loop2 == "y":
         uname = input("Enter your username= ")
         length = len(uname)
+        if length == 0:
+            print("Enter a valid username")
+            loop2 = "y"
 
-        for i in main.reg_data:
-            if uname == i[2]:
-                print("This username already exists")
-                loop2 = "y"
-
-            else:
-                if length == 0:
-                    print("Enter a valid username")
+        else:
+            for i in main.reg_data:
+                if uname == i[2]:
+                    print("This username already exists")
                     loop2 = "y"
-                else:
-                    user = uname
-                    loop2 = "n"
-                    return user
+                    break
+            else:
+                user = uname
+                loop2 = "n"
+                return user
+
+
+
+
 
 
 def password():
@@ -133,32 +137,6 @@ def pet():
             break
     return fav_pet
 
-# def mail():
-#      while True:
-#          print("please note that for the registration process you are required to enter your G-mail")
-#          import os
-#          import math
-#          import random
-#          import smtplib
-#
-#          digits = "0123456789"
-#          OTP = ""
-#          for i in range(6):
-#              OTP += digits[math.floor(random.random() * 10)]
-#          otp = OTP + " is your OTP"
-#          msg = otp
-#          s = smtplib.SMTP('smtp.gmail.com', 587)
-#          s.starttls()
-#          s.login("Your Gmail Account", "You app password")
-#          mail = input("Enter your email: ")
-#          s.sendmail('&&&&&&&&&&&', mail, msg)
-#          a = input("Enter Your OTP >>: ")
-#          if a == OTP:
-#              print("Verified")
-#              return mail
-#              break
-#          else:
-#              print("Please Check your OTP again")
 
 
 def fun():
@@ -168,11 +146,10 @@ def fun():
     uname = username()
     passwd = password()
     mb = mobile()
-    mail=print("enter your e-mIL")
-    #mail=mail()
+    mail=input("enter your e-mail: ")
 
-    print(
-        'Please provide the following details that will be required to change your password if you forget it in future.')
+
+    print('Please provide the following details that will be required to change your password if you forget it in future.')
     fav_place = place()
     fav_color = color()
     fav_pet = pet()
@@ -182,4 +159,8 @@ def fun():
     main.mycursor.execute(query)
     main.mycon.commit()
     print('##THANK YOU FOR REGISTERING WITH US!!##')
-
+    ch=input('Do you want to register another user?(y/n)= ').lower()
+    if ch=='y':
+        fun()
+    else:
+        pass
