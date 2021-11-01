@@ -13,7 +13,7 @@ reg_data = mycursor.fetchall()
 print('WELCOME TO SKYTOUCH!!')
 print("press 1 to login")
 print("press 2 to sign in")
-ch=input('> ')2
+ch=input('> ')
 
 if ch=='1' :
     login.verify()
