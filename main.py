@@ -40,4 +40,4 @@ elif ch=='2':
 # print("OTP sent succesfully..")
 # # close smtp session
 # s.quit()
-print('hi')
+print('hello')
