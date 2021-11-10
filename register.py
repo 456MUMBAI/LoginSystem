@@ -1,7 +1,6 @@
-# registration file
+# REGISTRATION FILE
 
 import main
-#import login
 
 
 def mobile():
@@ -42,10 +41,6 @@ def username():
                 return user
 
 
-
-
-
-
 def password():
     """to change / add password"""
     print("Password should not be less than 8 characters and more than 20 characters")
@@ -76,11 +71,11 @@ def vc():
     """To generate unique vc number for every new customer."""
     import random
     vt = random.randrange(100000, 100000000000)
-    for i in main.login_data:
-        if vt == i[0]:
+    for i in main.reg_data:
+        if str(vt) == i[0]:
             vt = random.randrange(100000, 1000000000)
     else:
-        return vt
+        return str(vt)
 
 
 def name():
@@ -95,48 +90,98 @@ def name():
             print("Please enter a valid name.")
             loop = "y"
         else:
-            loop = "n"
             return name
 
 
-def place():
-    """to input place"""
-    while True:
-        fav_place = input('Enter your favourite place: ')
-        if len(fav_place) == 0:
-            print('Please enter valid favourite place.')
-        elif fav_place.isspace():
-            print('Please enter a valid favourite place.')
+def email():
+    """to input email and verify it."""
+    mail = input("enter your e-mail: ")
+    if len(mail) == 0:
+        print('Invalid Email.')
+        email()
+    elif mail.isspace():
+        print('Invalid Email.')
+        email()
+    else:
+        ans = otp(mail)
+        if ans[0] == 'verified':
+
+            return ans[1]
         else:
-            break
-    return fav_place
+            print('Please input your email again.')
+            email()
 
 
-def color():
-    """to input color"""
-    while True:
-        fav_color = input('Enter your favourite color: ')
-        if len(fav_color) == 0:
-            print('Please enter valid favourite color.')
-        elif fav_color.isspace():
-            print('Please enter a valid favourite color.')
-        else:
-            break
-    return fav_color
+def otp(email):
+    import smtplib
+    import random
+    # create smtp session
+    s = smtplib.SMTP("smtp.gmail.com", 587)  # 587 is a port number
+    # start TLS for E-mail security
+    s.starttls()
+    # Log in to your gmail account
+    s.login("skytouch.clairie@gmail.com", "ceilotocco")
+    OTP = random.randint(1000, 9999)
+    OTP = str(OTP)
+
+    try:
+        s.sendmail("skytouch.clairie@gmail.com", email, OTP)
+        print("OTP sent successfully to registered mail id...")
+    except:
+        print('Invalid Email')
+        return 'invalid'
+
+    # OTP verification program
+    iOTP = input('Enter the OTP to verify your email: ')
+    if iOTP == OTP:
+        print('##OTP VERIFIED##')
+        # close smtp session
+        s.quit()
+        return ('verified', email)
+    else:
+        print('Invalid OTP!!!')
+        # close smtp session
+        s.quit()
+        return 'invalid'
 
 
-def pet():
-    """to input pet"""
-    while True:
-        fav_pet = input('Enter your favourite pet: ')
-        if len(fav_pet) == 0:
-            print('Please enter valid favourite pet.')
-        elif fav_pet.isspace():
-            print('Please enter a valid favourite pet.')
-        else:
-            break
-    return fav_pet
+# def place():
+#     """to input place"""
+#     while True:
+#         fav_place = input('Enter your favourite place: ')
+#         if len(fav_place) == 0:
+#             print('Please enter valid favourite place.')
+#         elif fav_place.isspace():
+#             print('Please enter a valid favourite place.')
+#         else:
+#             break
+#     return fav_place
 
+
+# def color():
+#     """to input color"""
+#     while True:
+#         fav_color = input('Enter your favourite color: ')
+#         if len(fav_color) == 0:
+#             print('Please enter valid favourite color.')
+#         elif fav_color.isspace():
+#             print('Please enter a valid favourite color.')
+#         else:
+#             break
+#     return fav_color
+
+
+# def pet():
+#     """to input pet"""
+#     while True:
+#         fav_pet = input('Enter your favourite pet: ')
+#         if len(fav_pet) == 0:
+#             print('Please enter valid favourite pet.')
+#         elif fav_pet.isspace():
+#             print('Please enter a valid favourite pet.')
+#         else:
+#             break
+#     return fav_p
 
 
 def fun():
@@ -146,22 +191,15 @@ def fun():
     uname = username()
     passwd = password()
     mb = mobile()
-    mail=input("enter your e-mail: ")
-
-
-    print('Please provide the following details that will be required to change your password if you forget it in future.')
-    fav_place = place()
-    fav_color = color()
-    fav_pet = pet()
+    mail = email()
     VC = vc()
 
-    query = f"insert into reg values('{VC}','{nm}','{uname}','{mb}','{passwd}','{mail}', '{fav_place}','{fav_color}','{fav_pet}')"
+    query = f"insert into reg values('{VC}','{nm}','{uname}','{mb}','{passwd}','{mail}')"
     main.mycursor.execute(query)
     main.mycon.commit()
-    print('##THANK YOU FOR REGISTERING WITH US!!##')
-    ch=input('Do you want to register another user?(y/n)= ').lower()
-    if ch=='y':
+    print('##THANK YOU FOR REGISTERING!!##')
+    ch = input('Do you want to register another user?(y/n)= ').lower()
+    if ch == 'y':
         fun()
     else:
-        pass
-# print('hellonjb')
+        main.menu()
