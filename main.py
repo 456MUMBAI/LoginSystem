@@ -41,7 +41,7 @@ def Exit():
     exit()
 
 
-login.verify()
+menu()
 
 # OTP sending program
 # import smtplib
