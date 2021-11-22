@@ -4,7 +4,7 @@ import main
 
 
 def mobile():
-    """to input mobile no. of user."""
+    """To input mobile no. of user."""
     loop1 = "y"
     while loop1 == "y":
         mb = input("Enter your mobile number= ")
@@ -20,7 +20,7 @@ def mobile():
 
 
 def username():
-    """to input username of user"""
+    """To input username of user"""
     loop2 = "y"
     while loop2 == "y":
         uname = input("Enter your username= ")
@@ -42,7 +42,7 @@ def username():
 
 
 def password():
-    """to change / add password"""
+    """To change / add password"""
     print("Password should not be less than 8 characters and more than 20 characters")
     print("Password should consist of only digits and alphabets")
     print("No special characters allowed")
@@ -113,6 +113,7 @@ def email():
 
 
 def otp(email):
+    """otp generation and verification program"""
     import smtplib
     import random
     # create smtp session
@@ -137,7 +138,7 @@ def otp(email):
         print('##OTP VERIFIED##')
         # close smtp session
         s.quit()
-        return ('verified', email)
+        return 'verified', email
     else:
         print('Invalid OTP!!!')
         # close smtp session
@@ -185,6 +186,7 @@ def otp(email):
 
 
 def fun():
+    """main function to store user data in the reg table"""
     print('##REGISTRATION WINDOW##')
     print('Dear Customer, please note our DTH service is only available in INDIA.')
     nm = name()
@@ -192,6 +194,7 @@ def fun():
     passwd = password()
     mb = mobile()
     mail = email()
+    print(mail)
     VC = vc()
 
     query = f"insert into reg values('{VC}','{nm}','{uname}','{mb}','{passwd}','{mail}')"

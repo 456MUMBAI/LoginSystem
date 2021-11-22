@@ -5,17 +5,20 @@ import mysql.connector as ms
 
 mycon = ms.connect(host='db4free.net', user='clairie', passwd='education', charset='utf8', database='skytouch')
 
-print('connected!')
+# print('connected!')
 mycursor = mycon.cursor()
 mycursor.execute('select * from login_info;')
 login_data = mycursor.fetchall()
+print(login_data)
 mycursor.execute("select * from reg;")
 reg_data = mycursor.fetchall()
+print(reg_data)
 
 
 def menu():
+    """Home Page"""
     print('WELCOME TO SKYTOUCH!!')
-    print('See the Unseen!!')
+    print('Learn with Entertainment')
     print("Press 1 to login")
     print("New User? Register Now. Press 2")
     print('Press 0 to EXIT')
@@ -32,12 +35,13 @@ def menu():
 
 
 def Exit():
-    print("##THANK YOU FOR VISITING OUR WEBSITE. NEVER STOP LEARNING AND ENTERTAINMENT##")
+    """To terminate the program"""
+    print("##THANK YOU FOR VISITING OUR WEBSITE. NEVER STOP LEARNING AND HAVING ENTERTAINMENT##")
     mycon.close()
     exit()
 
 
-menu()
+login.verify()
 
 # OTP sending program
 # import smtplib
