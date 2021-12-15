@@ -1,7 +1,8 @@
 # MAIN FILE
-import login
+import temp1
 import register
 import mysql.connector as ms
+import login
 
 mycon = ms.connect(host='db4free.net', user='clairie', passwd='education', charset='utf8', database='skytouch')
 
