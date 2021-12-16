@@ -484,16 +484,17 @@ def mahafamilypack():
 
 
 def specialoffer():
-    print("purchase  any of our premium plans and get 50% off on NETFLIX basic plan")
-    print("purchase our family plan and get 50% off on NETFLIX standard plan")
+    print(Style.BRIGHT+Fore.BLUE+'## SPECIAL OFFER ##'.center(45)+Style.RESET_ALL)
+    print(Style.BRIGHT+Fore.MAGENTA+"Purchase  any of our premium plans and get 50% off on NETFLIX basic plan!!")
+    print("Purchase our family plan and get 50% off on NETFLIX standard plan"+Style.RESET_ALL)
 
 
 def basic():
-    print("please select your language")
-    print("press 1 for hindi")
-    print("press 2 for english")
-    print("press 3 for others")
-    a=int(input("please enter your choice= "))
+    print(Style.BRIGHT+ Fore.BLACK+"## Please select your language preference ##")
+    print("Press 1 for hindi")
+    print("Press 2 for english")
+    print("Press 3 for others")
+    a=int(input("Enter your choice= "))
     if a == 1:
         print("PURCHASE ANY PLAN AND GET THESE CHANNELS FOR" +Style.BRIGHT+ Fore.MAGENTA+ "FREE!!!"+Style.RESET_ALL)
         # print("                  1)DISCOVERY                     ")
