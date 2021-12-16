@@ -123,17 +123,20 @@ def otp(email):
     # Log in to your gmail account
     s.login("skytouch.clairie@gmail.com", "ceilotocco")
     OTP = random.randint(1000, 9999)
-    OTP = str(OTP)
+    msg = '''Dear User,
+    
+    Thank you for registering at SKYTOUCH. We have received your request for registration.
+    Your OTP for validation is= '''+str(OTP)
 
     try:
-        s.sendmail("skytouch.clairie@gmail.com", email, OTP)
+        s.sendmail("skytouch.clairie@gmail.com", email, msg)
         print("OTP sent successfully to registered mail id...")
     except:
         print('Invalid Email')
         return 'invalid'
 
     # OTP verification program
-    iOTP = input('Enter the OTP to verify your email: ')
+    iOTP = int(input('Enter the OTP to verify your email: '))
     if iOTP == OTP:
         print('##OTP VERIFIED##')
         # close smtp session

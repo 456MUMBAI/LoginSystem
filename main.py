@@ -1,6 +1,6 @@
 # MAIN FILE
-import temp1
-import register
+
+import reg
 import mysql.connector as ms
 import login
 
@@ -27,7 +27,7 @@ def menu():
     if ch == '1':
         login.verify()
     elif ch == '2':
-        register.fun()
+        reg.fun()
     elif ch == '0':
         Exit()
     else:

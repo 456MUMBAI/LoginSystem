@@ -1,7 +1,6 @@
 # LOGIN FILE
 import main
-
-
+import reg
 def menu(username):
     print(f'WELCOME {username}! ')
     main.Exit()
@@ -33,31 +32,45 @@ def verify():
 
 
 def change_pswd():
+    from reg import otp as O
     """To change password"""
     VC = input('Enter your VC number= ')
-    for i in main.reg_data:
-        if VC in i[0]:
-            user_info = i
-            print('##CHANGE PASSWORD WINDOW##')
-            import register
-            ans = register.otp(main.reg_data[5])
-            if ans[0] == 'verified':
+    try:
+        if 100000<=int(VC)<=100000000000:
+            for i in main.reg_data:
+                if VC in i[0]:
+                    user_info = i
+                    print('##CHANGE PASSWORD WINDOW##')
+                    print('hhh')
+                    print('jjj')
+                    ans = O(user_info[5])
+                    print(ans)
+                    if ans[0] == 'verified':
 
-                new_pswd = register.password()
-                query1 = f"update login_info set password='{new_pswd}' where username='{user_info[2]}'"
-                main.mycursor.execute(query1)
-                query2 = f"update reg set passwd='{new_pswd}' where VC='{user_info[0]}'"
-                main.mycursor.execute(query2)
-                print('##Updated Password Successfully##')
-                menu(user_info[2])
+                        new_pswd = reg.password()
+                        query1 = f"update login_info set password='{new_pswd}' where username='{user_info[2]}'"
+                        main.mycursor.execute(query1)
+                        query2 = f"update reg set passwd='{new_pswd}' where VC='{user_info[0]}'"
+                        main.mycursor.execute(query2)
+                        print('##Updated Password Successfully##')
+                        menu(user_info[2])
+                    else:
+                        print('Invalid OTP!')
+                        break
             else:
-                print('Invalid OTP!')
-                break
-        else:
-            print('No such VC number exists. ')
-            ch = int(input('Press 1 to re-enter VC number. Else press any key to continue:  '))
-            if ch == 1:
-                change_pswd()
-            else:
-                main.menu()
+                print('No such VC number exists. ')
+                ch = int(input('Press 1 to re-enter VC number. Else press any key to continue:  '))
+                if ch == 1:
+                    change_pswd()
+                else:
+                    main.menu()
+    except ValueError:
+        print('Please enter a Valid VC number.')
+        change_pswd()
+    else:
+        print('Please enter a Valid VC number')
+        change_pswd()
     main.menu()
+
+
+# k=reg.otp('ritu.kansal456@gmail.com')
