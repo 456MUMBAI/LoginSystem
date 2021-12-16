@@ -32,7 +32,7 @@ def verify():
 
 
 def change_pswd():
-    from reg import otp as O
+    import reg
     """To change password"""
     VC = input('Enter your VC number= ')
     try:
@@ -43,7 +43,7 @@ def change_pswd():
                     print('##CHANGE PASSWORD WINDOW##')
                     print('hhh')
                     print('jjj')
-                    ans = O(user_info[5])
+                    ans = reg.otp(user_info[5])
                     print(ans)
                     if ans[0] == 'verified':
 
