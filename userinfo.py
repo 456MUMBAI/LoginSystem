@@ -1,6 +1,7 @@
 from prettytable import PrettyTable
 from colorama import Fore, Back, Style
-
+import main
+import reg
 
 def basicplanhindi():
     print(Style.BRIGHT + Fore.BLUE + '## BASIC HINDI PLAN ##'.center(45), Style.RESET_ALL)
@@ -42,7 +43,8 @@ def basicplanhindi():
     print(
         Style.BRIGHT + Fore.LIGHTRED_EX + "*****************************************************************************************************************",
         Style.RESET_ALL)
-
+    price=65
+    return price
 
 def premiumhindiplan():
     print(Style.BRIGHT + Fore.BLUE + '## PREMIUM HINDI PLAN ##'.center(45), Style.RESET_ALL)
@@ -109,6 +111,8 @@ def premiumhindiplan():
     print(
         Style.BRIGHT + Fore.LIGHTRED_EX + "*****************************************************************************************************************",
         Style.RESET_ALL)
+    price=165
+    return 165
 
 
 def basicengplan():
@@ -147,7 +151,8 @@ def basicengplan():
     print(
         Style.BRIGHT + Fore.LIGHTRED_EX + "*****************************************************************************************************************",
         Style.RESET_ALL)
-
+    price=70
+    return price
 
 def premiumengplan():
     print(Style.BRIGHT + Fore.BLUE + '## PREMIUM ENGLISH PLAN ##'.center(45), Style.RESET_ALL)
@@ -203,6 +208,8 @@ def premiumengplan():
     print(
         Style.BRIGHT + Fore.LIGHTRED_EX + "*****************************************************************************************************************",
         Style.RESET_ALL)
+    price=179
+    return price
 
 
 def familyplan():
@@ -256,7 +263,8 @@ def familyplan():
     print(
         Style.BRIGHT + Fore.LIGHTRED_EX + "*****************************************************************************************************************",
         Style.RESET_ALL)
-
+    price=260
+    return price
 
 def mahafamilypack():
     print(Style.BRIGHT + Fore.BLUE + '##  MAHA FAMILY PLAN ##'.center(45), Style.RESET_ALL)
@@ -312,7 +320,8 @@ def mahafamilypack():
     print(
         Style.BRIGHT + Fore.LIGHTRED_EX + "*****************************************************************************************************************",
         Style.RESET_ALL)
-
+    price=325
+    return price
 
 def specialoffer():
     print(Style.BRIGHT + Fore.BLUE + '## SPECIAL OFFER ##'.center(45) + Style.RESET_ALL)
@@ -320,8 +329,8 @@ def specialoffer():
     print("Purchase our family plan and get 50% off on NETFLIX standard plan" + Style.RESET_ALL)
 
 
-def basic():
-    specialoffer()
+def display():
+    print('## PACK Display WINDOW ##')
     print("## Please select your language preference ##")
     print("Press 1 for hindi")
     print("Press 2 for english")
@@ -330,7 +339,7 @@ def basic():
     print(
         Style.BRIGHT + Fore.LIGHTRED_EX + "*****************************************************************************************************************",
         Style.RESET_ALL)
-
+    specialoffer()
     print("PURCHASE ANY PLAN AND GET THESE CHANNELS FOR" + Style.BRIGHT + Fore.MAGENTA + " FREE!!!" + Style.RESET_ALL)
     offer = PrettyTable(
         [Style.BRIGHT + Fore.BLACK + Back.LIGHTMAGENTA_EX + 'DISCOVERY', 'NATIONAL GEOGRAPHIC', 'HISTORY TV 18',
@@ -347,12 +356,12 @@ def basic():
         premiumhindiplan()
         mahafamilypack()
         familyplan()
-        print("press 0 to change your language preference else press any key to skip")
+        print("press 0 to change your language preference","press 1 to start selecting your package.",sep='\n')
         q = input("enter your choice here:  ")
         if q == "0":
-            basic()
-
-
+            display()
+        elif q== '1':
+            select()
         else:
             pass
 
@@ -361,27 +370,96 @@ def basic():
         premiumengplan()
         familyplan()
         mahafamilypack()
-
-        print("press 0 to change your language preference else press any key to skip")
+        print("press 0 to change your language preference", "press 1 to start selecting your package.", sep='\n')
         q = input("enter your choice here:  ")
-
         if q == "0":
-            basic()
-
+            display()
+        elif q == '1':
+            select()
         else:
             pass
 
     else:
         print(Style.BRIGHT + 'Please enter a valid choice!' + Style.RESET_ALL)
-        basic()
+        display()
 
 
-basic()
+# basic()
 
-print(
-    Fore.BLUE + Style.BRIGHT + " We are best known for providing entertainment and knowledge at cheap and affordable rates ")
-print("**************Thank you for viewing  our plans *****************" + Style.RESET_ALL)
+# print(
+#     Fore.BLUE + Style.BRIGHT + " We are best known for providing entertainment and knowledge at cheap and affordable rates ")
+# print("**************Thank you for viewing  our plans *****************" + Style.RESET_ALL)
 
 
-# print('i')
-# dsfdffgsff
+def select():
+    #menu
+    print(f'Welcome !!')
+    print('Press 0 to view our Skytouch Combos')
+    print('Press 1 to select Basic Hindi Plan.')
+    print('Press 2 to select Premium Hindi Plan.')
+    print('Press 3 to select Basic English Plan.')
+    print('Press 4 to select Premium English Plan.')
+    print('Press 5 to select Family Plan.')
+    print('Press 6 to select Maha Family Plan.')
+    ch= input('Enter your choice here= ')
+    if ch=='1':
+        print('You\'ve selected Basic Hindi Plan which includes following channels: ')
+        amount=basicplanhindi()
+        print()
+        print()
+        confirm('Basic Hindi Plan',amount)
+    elif ch=='2':
+        print('You\'ve selected Premium Hindi Plan which includes following channels: ')
+        amount=premiumhindiplan()
+        print()
+        print()
+        confirm('Premium Hindi Plan',amount)
+    elif ch=='3':
+        print('You\'ve selected Basic English Plan which includes following channels: ')
+        amount=basicengplan()
+        print()
+        print()
+        confirm('Basic English Plan',amount)
+    elif ch=='4':
+        print('You\'ve selected Premium English Plan which includes following channels: ')
+        amount=premiumengplan()
+        print()
+        print()
+        confirm('Premium English Plan',amount)
+    elif ch=='5':
+        print('You\'ve selected Family Plan which includes following channels: ')
+        amount=familyplan()
+        print()
+        print()
+        confirm('Family Plan',amount)
+    elif ch=='6':
+        print('You\'ve selected Maha Family Plan which includes following channels: ')
+        amount=mahafamilypack()
+        print()
+        print()
+        confirm('Maha Family Plan',amount)
+    elif ch=='0':
+        display()
+    else:
+        print('Please Enter a valid choice.')
+        select()
+
+
+def confirm(pack,price):
+    print('press 0 to confirm your selection.')
+    print('Press 1 to change your selection')
+    ans=input('Enter your choice here: ')
+    if ans=='0':
+        query = f"insert into user_info values('{reg.details.u}','{pack},'{price}')"
+        main.mycursor.execute(query)
+        main.mycon.commit()
+        pass
+    elif ans=='1':
+        select()
+    else:
+        print('Please enter a valid choice.')
+        confirm(pack,price)
+
+
+
+

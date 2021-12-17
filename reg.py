@@ -1,6 +1,53 @@
 # REGISTRATION FILE
 
 import main
+import userinfo
+
+def fun():
+    """main function to store user data in the reg table"""
+    print('##REGISTRATION WINDOW##')
+    print('Dear Customer, please note our DTH service is only available in INDIA.')
+    query = f"insert into reg values('{details.VC}','{details.nm}','{details.uname}','{details.mb}','{details.passwd}','{details.mail}')"
+    main.mycursor.execute(query)
+    main.mycon.commit()
+    userinfo.select()
+    return details.uname
+
+def otp(email):
+    """otp generation and verification program"""
+    import smtplib
+    import random
+    # create smtp session
+    s = smtplib.SMTP("smtp.gmail.com", 587)  # 587 is a port number
+    # start TLS for E-mail security
+    s.starttls()
+    # Log in to your gmail account
+    s.login("skytouch.clairie@gmail.com", "ceilotocco")
+    OTP = random.randint(1000, 9999)
+    msg = '''Dear User,
+
+    Thank you for registering at SKYTOUCH. We have received your request for registration.
+    Your OTP for validation is= ''' + str(OTP)
+
+    try:
+        s.sendmail("skytouch.clairie@gmail.com", email, msg)
+        print("OTP sent successfully to registered mail id...")
+    except:
+        print('Invalid Email')
+        return 'invalid'
+
+    # OTP verification program
+    iOTP = int(input('Enter the OTP to verify your email: '))
+    if iOTP == OTP:
+        print('##OTP VERIFIED##')
+        # close smtp session
+        s.quit()
+        return 'verified', email
+    else:
+        print('Invalid OTP!!!')
+        # close smtp session
+        s.quit()
+        return 'invalid'
 
 
 def mobile():
@@ -112,100 +159,21 @@ def email():
             email()
 
 
-def otp(email):
-    """otp generation and verification program"""
-    import smtplib
-    import random
-    # create smtp session
-    s = smtplib.SMTP("smtp.gmail.com", 587)  # 587 is a port number
-    # start TLS for E-mail security
-    s.starttls()
-    # Log in to your gmail account
-    s.login("skytouch.clairie@gmail.com", "ceilotocco")
-    OTP = random.randint(1000, 9999)
-    msg = '''Dear User,
-    
-    Thank you for registering at SKYTOUCH. We have received your request for registration.
-    Your OTP for validation is= '''+str(OTP)
-
-    try:
-        s.sendmail("skytouch.clairie@gmail.com", email, msg)
-        print("OTP sent successfully to registered mail id...")
-    except:
-        print('Invalid Email')
-        return 'invalid'
-
-    # OTP verification program
-    iOTP = int(input('Enter the OTP to verify your email: '))
-    if iOTP == OTP:
-        print('##OTP VERIFIED##')
-        # close smtp session
-        s.quit()
-        return 'verified', email
-    else:
-        print('Invalid OTP!!!')
-        # close smtp session
-        s.quit()
-        return 'invalid'
 
 
-# def place():
-#     """to input place"""
-#     while True:
-#         fav_place = input('Enter your favourite place: ')
-#         if len(fav_place) == 0:
-#             print('Please enter valid favourite place.')
-#         elif fav_place.isspace():
-#             print('Please enter a valid favourite place.')
-#         else:
-#             break
-#     return fav_place
 
-
-# def color():
-#     """to input color"""
-#     while True:
-#         fav_color = input('Enter your favourite color: ')
-#         if len(fav_color) == 0:
-#             print('Please enter valid favourite color.')
-#         elif fav_color.isspace():
-#             print('Please enter a valid favourite color.')
-#         else:
-#             break
-#     return fav_color
-
-
-# def pet():
-#     """to input pet"""
-#     while True:
-#         fav_pet = input('Enter your favourite pet: ')
-#         if len(fav_pet) == 0:
-#             print('Please enter valid favourite pet.')
-#         elif fav_pet.isspace():
-#             print('Please enter a valid favourite pet.')
-#         else:
-#             break
-#     return fav_p
-
-
-def fun():
-    """main function to store user data in the reg table"""
-    print('##REGISTRATION WINDOW##')
-    print('Dear Customer, please note our DTH service is only available in INDIA.')
+class details:
     nm = name()
+    n=nm
     uname = username()
+    u=uname
     passwd = password()
+    p=passwd
     mb = mobile()
+    m=mb
     mail = email()
-    print(mail)
+    ml=mail
     VC = vc()
+    v=VC
 
-    query = f"insert into reg values('{VC}','{nm}','{uname}','{mb}','{passwd}','{mail}')"
-    main.mycursor.execute(query)
-    main.mycon.commit()
-    print('##THANK YOU FOR REGISTERING!!##')
-    ch = input('Do you want to register another user?(y/n)= ').lower()
-    if ch == 'y':
-        fun()
-    else:
-        main.menu()
+
