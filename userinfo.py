@@ -1,7 +1,7 @@
 from prettytable import PrettyTable
 from colorama import Fore, Back, Style
-import main
-import reg
+# import main
+# import reg
 
 def basicplanhindi():
     print(Style.BRIGHT + Fore.BLUE + '## BASIC HINDI PLAN ##'.center(45), Style.RESET_ALL)
