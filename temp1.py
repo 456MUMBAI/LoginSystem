@@ -211,3 +211,8 @@
 #         home.menu()
 #
 #
+# import temp
+# def fun1():
+#     print('in file 1: temp1')
+# fun1()
+# temp.fun2()
