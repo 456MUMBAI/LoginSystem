@@ -13,8 +13,6 @@ mycursor.execute("select * from reg;")
 reg_data = mycursor.fetchall()
 
 
-# print(reg_data)
-
 
 def menu():
     print('WELCOME TO SKYTOUCH!!')
@@ -153,13 +151,33 @@ def whyus():
 # LOGIN FILE
 
 def welcome(username):
+    mycursor.execute(f"select price,paid from user_info where username = '{username}';")
+    recharge_Data=mycursor.fetchall() #price,paid
+    balance=recharge_Data[1]
+    price=recharge_Data[0]
     print(f'WELCOME {username}! ')
-    print("PRESS 0 TO MODIFY YOUR PACKAGE ELSE PRESS ANY KEY TO SKIP")
+    print("PRESS 0 TO MODIFY YOUR PACKAGE")
+    print('PRESS 1 TO RECHARGE YOUR ACCOUNT')
+    print('PRESS 2 TO VIEW YOUR PROFILE')
+    print('PRESS 3 TO LOG OUT')
     ans = input("enter your choice here= ")
     if ans == "0":
         modify(username)
+    elif ans=='1':
+        print(f'Your account  balance is = Rs. {balance} ')
+        if balance!=0:
+            print('Your account is already recharged. Thank You!')
+            welcome(username)
+        else:
+            time_period(price)
+    elif ans=='2':
+        '''viewing profile to be made here!!!'''
+    elif ans=='3':
+        print('Logging Out...')
+        menu()
     else:
-        Exit()
+        print('Please enter a valid choice!')
+        welcome(username)
 
 
 def verify():
@@ -196,7 +214,9 @@ def change_pswd():
                 if VC in i[0]:
                     user_info = i
                     print('##CHANGE PASSWORD WINDOW##')
-                    ans = otp(user_info[5])
+                    msg='Dear User,' \
+                        'We have received your request to change your SKYTOUCH account password.'
+                    ans = otp(user_info[5],msg)
                     if ans[0] == 'verified':
                         new_pswd = password()
                         query1 = f"update login_info set password='{new_pswd}' where username='{user_info[2]}'"
@@ -256,7 +276,7 @@ def fun():
         menu()
 
 
-def otp(email):
+def otp(email,msg):
     """otp generation and verification program"""
     import smtplib
     import random
@@ -267,10 +287,8 @@ def otp(email):
     # Log in to your gmail account
     s.login("skytouch.clairie@gmail.com", "ceilotocco")
     OTP = random.randint(1000, 9999)
-    msg1 = '''Dear User,
-
-    Thank you for registering at SKYTOUCH. We have received your request for registration.
-    Your OTP for validation is= ''' + str(OTP)
+    a=str(OTP)
+    msg1 = msg+' Your OTP for validation is= ' + str(OTP)
 
     try:
         s.sendmail("skytouch.clairie@gmail.com", email, msg1)
@@ -393,7 +411,9 @@ def email():
         print('Invalid Email.')
         email()
     else:
-        ans = otp(mail)
+        msg='''Dear User,
+        Thank you for registering at SKYTOUCH. We have received your request for registration.'''
+        ans = otp(mail,msg)
         if ans[0] == 'verified':
 
             return ans[1]
@@ -854,7 +874,13 @@ def selection_confirm(pack, price, U):
         query = f"insert into user_info values('{U}','{pack}',{price})"
         mycursor.execute(query)
         mycon.commit()
-        pass
+        print('Press 1 to make payment')
+        print('Else press any key to skip payment, you can pay later by logging into your account.')
+        ch=input('Enter your choice here: ')
+        if ch=='1':
+            time_period(price)
+        else:
+            menu()
     elif ans == '1':
         select(U)
     else:
@@ -988,7 +1014,7 @@ def modify(u):
 
 
 def modify_confirm(pack, price, U):
-    print('press 0 to confirm your selection.')
+    print('Press 0 to confirm your selection.')
     print('Press 1 to change your selection')
     ans = input('Enter your choice here: ')
     if ans == '0':
@@ -1001,5 +1027,111 @@ def modify_confirm(pack, price, U):
         print('Please enter a valid choice.')
         modify_confirm(pack, price, U)
 
+def time_period(am):
+    print("Select your Skytouch Recharge Time Period")
+    print('############################################################################################################')
+    print('## OFFERS ##')
+    print('On 3 month recharge get 7 Days extra!!')
+    print('On 6 month recharge get 15 Days extra!!')
+    print('On 1 year recharge get 30 Days extra!!')
+    print('###########################################################################################################')
+    print("Press 0 to recharge for 3 months")
+    print('Press 1 to recharge for 6 months')
+    print('Press 2 to recharge for 1 year')
+    ch=input('Enter your choice here: ')
+    if ch=='0':
+        Total_amount=am*3
+        print(f'Your total amount = Rs. {Total_amount}')
+        ans=input('Press 1 to change your time period else press any key to proceed : ')
+        if ans=='1':
+            time_period(am)
+        else:
+            transaction(Total_amount)
+    elif ch=='1':
+        Total_amount = am*6
+        print(f'Your total amount = Rs. {Total_amount}')
+        ans = input('Press 1 to change your time period else press any key to proceed : ')
+        if ans == '1':
+            time_period(am)
+        else:
+            transaction(Total_amount)
+    elif ch=='2':
+        Total_amount = am*12
+        print(f'Your total amount = Rs. {Total_amount}')
+        ans = input('Press 1 to change your time period else press any key to proceed : ')
+        if ans == '1':
+            time_period(am)
+        else:
+            transaction(Total_amount)
+    else:
+        print('Please enter a valid choice!!!')
+        time_period(am)
+
+def transaction(total_amount):
+    print('#Make your payment HERE...##')
+    print('Select the mode of payment')
+    print('Press 0 for Debit card.')
+    print('Press 1 for net banking.')
+    ch=input('Enter your choice here: ')
+    if ch=='1':
+        print("## NET BANKING WINDOW ##")
+        ans = input('Press 1 to change mode of payment else press any key to proceed: ')
+        if ans=='1':
+            transaction(total_amount)
+        else:
+            '''net banking platform to be made here....'''
+
+    elif ch=='2':
+        print('## DEBIT CARD WINDOW ##')
+        ans=input('Press 1 to change mode of payment else press any key to proceed: ')
+        if ans=='1':
+            transaction(total_amount)
+        else:
+
+            Card_no= card_no()
+            Card_Holder=cardholder()
+            Exp_date=expiry_date()
+            CVV=cvv()
+            print(f'Your total amount is= Rs. {total_amount}')
+            print(f'Press 1 to pay Rs. {total_amount}')
+            print('Press any key to skip the transaction, you can pay later by logging into your account')
+            Ans=input('Enter your choice here: ')
+            if Ans=='1':
+
+                query = f"insert into user_info(paid) values({total_amount});"
+                mycursor.execute(query)
+                mycon.commit()
+                print('Payment made successfully!!')
+            else:
+                menu()
+
+
+def card_no():
+    card_number = input('CARD NUMBER: ')
+    if len(card_number)!=16:
+        print('Invalid card number!!')
+        card_no()
+    else:
+        return card_number
+def cardholder():
+    name = input('CARDHOLDER NAME: ').upper()
+    if name=='' or name.isspace() or name.isdigit():
+        print("Invalid Cardholder name!!")
+        cardholder()
+    else:
+        return name
+def expiry_date():
+    exp_date = input('EXPIRY DATE (MM/YYYY): ')
+    if len(exp_date)!=7:
+        print('Invalid expiry date!!')
+        expiry_date()
+    else:
+        return exp_date
+def cvv():
+    Cvv=input('CVV: ')
+    if len(Cvv)!=3:
+        print('Invalid CVV!!')
+    else:
+        return Cvv
 
 menu()
