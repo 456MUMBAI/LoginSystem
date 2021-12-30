@@ -1051,7 +1051,13 @@ def modify_confirm(pack, price, U):
     print('Press 1 to change your selection')
     ans = input('Enter your choice here: ')
     if ans == '0':
-        query = f"update user_info set pack='{pack}' where username='{U}'"
+        amount = time_period(price)
+        query1=f"select paid from user_info where username='{U}';"
+        mycursor.execute(query1)
+        balance = mycursor.fetchall()
+        mycon.commit()
+        final=int(amount-balance)
+        query = f"update user_info set pack='{pack}',paid='{final}' where username='{U}';"
         mycursor.execute(query)
         mycon.commit()
     elif ans == '1':
@@ -1081,6 +1087,7 @@ def time_period(am):
         else:
 
             transaction(Total_amount)
+        return Total_amount
     elif ch=='1':
         Total_amount = am*6
         print(f'Your total amount = Rs. {Total_amount}')
@@ -1089,6 +1096,7 @@ def time_period(am):
             time_period(am)
         else:
             transaction(Total_amount)
+        return Total_amount
     elif ch=='2':
         Total_amount = am*12
         print(f'Your total amount = Rs. {Total_amount}')
@@ -1097,6 +1105,7 @@ def time_period(am):
             time_period(am)
         else:
             transaction(Total_amount)
+        return Total_amount
     else:
         print('Please enter a valid choice!!!')
         time_period(am)
