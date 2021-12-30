@@ -157,12 +157,9 @@ def whyus():
 
 def welcome(username):
     mycursor.execute(f"select price,paid from user_info where username = '{username}';")
-    recharge_Data=mycursor.fetchall()
-    if recharge_Data==[]:
-        pass
-    else:
-        balance = recharge_Data[1]
-        price = recharge_Data[0]
+    recharge_Data=mycursor.fetchall() #price,paid
+    balance = recharge_Data[1]
+    price = recharge_Data[0]
     #price,paid
     #print(recharge_Data)
 
@@ -183,6 +180,17 @@ def welcome(username):
             time_period(price)
     elif ans=='2':
         '''viewing profile to be made here!!!'''
+        print(Fore.BLACK+Style.BRIGHT+'ACCOUNT DETAILS'.center(60)+Style.RESET_ALL)
+        query=f"select vc,mail, mobile from reg where username={username};"
+        mycursor.execute()
+        vc,mail,mobile_no=mycursor.fetchall()
+        mycon.commit()
+        print(f'VC number= {vc} ')
+        print(f'Registered mobile number= {mobile_no}')
+        print(f'Registered mail id={mail}')
+        print(f'Total Recharge Amount= {price}')
+        print(f'Account Balance= {balance}')
+
     elif ans=='3':
         print('Logging Out...')
         menu()
@@ -891,6 +899,9 @@ def selection_confirm(pack, price, U):
         if ch=='1':
             time_period(price)
         else:
+            query = f"insert into user_info(paid) values(0);"
+            mycursor.execute(query)
+            mycon.commit()
             menu()
     elif ans == '1':
         select(U)
@@ -1115,6 +1126,10 @@ def transaction(total_amount):
                 mycon.commit()
                 print('Payment made successfully!!')
             else:
+                query = f"insert into user_info(paid) values(0);"
+                mycursor.execute(query)
+                mycon.commit()
+
                 menu()
 
 
@@ -1147,22 +1162,22 @@ def cvv():
         return Cvv
 
 def contact():
-    print('you can contact us for your  queries, providing feedback and registering complaint '.upper())
-    print("we are providing 24/7 service to our customers. feel free to contact us".upper())
-    print('press 1 to know about our contact  details else press any key to skip'.capitalize())
-    ch=input("enter your choice= ")
+    print('You can contact us for your  queries, provide feedback and register your complaint at any time. We are pleased to help you! '.upper())
+    print("We provide 24/7 service to our customers. Feel free to contact us".upper())
+    print('Press 1 to know about our contact  details else press any key to skip'.capitalize())
+    ch=input("Enter your choice= ")
     if ch=="1":
-        print("You can contact us through our mail provided below")
-        print("skytouch.clairie@gmail.com")
+        print("You can contact us through our mail provided below:-")
+        print(Style.BRIGHT+"skytouch.clairie@gmail.com"+Style.RESET_ALL)
     else:
         menu()
 
 
 
-menu()
-print("do you want to explore more on our page".upper())
-print("if yes press 1 else press any key to exit".upper())
-ch=input("enter your choice= ".capitalize())
+
+print("Do you want to explore more on our page".upper())
+print("If yes press 1 else press any key to exit".upper())
+ch=input("Enter your choice= ")
 if ch=="1":
     menu()
 else:
@@ -1170,7 +1185,7 @@ else:
     print("HAVE A NICE DAY")
 
 
-
+menu()
 #hello
 
 
