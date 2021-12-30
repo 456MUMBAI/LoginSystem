@@ -1,6 +1,7 @@
 from colorama import Fore, Style, Back
 import mysql.connector as ms
 from prettytable import PrettyTable
+from datetime import date, timedelta
 
 # DATA
 mycon = ms.connect(host='db4free.net', user='clairie', passwd='education', charset='utf8', database='skytouch')
@@ -57,7 +58,7 @@ def home():
     print("To know more about our core values. Press 2")
     print("To know more about our technology and infrastructure. Press 3")
     print("To know why you should select us as your DTH service provider. Press 4")
-    ch = int(input("please enter your choice="))
+    ch = int(input("Enter your choice here= "))
     if ch == 1:
         vision()
     if ch == 2:
@@ -68,9 +69,9 @@ def home():
         whyus()
 
     else:
-        print("please enter a valid choice")
-    print("Do you want to know more about us.If yes press 0 else press any key to skip")
-    i = input("please enter")
+        print("Please enter a valid choice!!")
+    print("To know more about us press 0, else press any key to skip.")
+    i = input("Enter your choice here= ")
     if i == "0":
         home()
     else:
@@ -156,10 +157,18 @@ def whyus():
 # LOGIN FILE
 
 def welcome(username):
-    mycursor.execute(f"select price,paid from user_info where username = '{username}';")
+    mycursor.execute(f"select price,paid,pay_date from user_info where username = '{username}';")
     recharge_Data=mycursor.fetchall() #price,paid
     balance = recharge_Data[1]
     price = recharge_Data[0]
+    tenure=int(balance/price)
+
+    try:
+        pay_date= recharge_Data[2]
+        next_recharge_date = (pay_date + timedelta(days=tenure)).isoformat()
+    except:
+        pay_date='0000-00-00'
+        next_recharge_date='0000-00-00'
     #price,paid
     #print(recharge_Data)
 
@@ -180,16 +189,18 @@ def welcome(username):
             time_period(price)
     elif ans=='2':
         '''viewing profile to be made here!!!'''
-        print(Fore.BLACK+Style.BRIGHT+'ACCOUNT DETAILS'.center(60)+Style.RESET_ALL)
-        query=f"select vc,mail, mobile from reg where username={username};"
-        mycursor.execute()
-        vc,mail,mobile_no=mycursor.fetchall()
+        query = f"select vc,mail, mobile from reg where username={username};"
+        mycursor.execute(query)
+        vc, mail, mobile_no = mycursor.fetchall()
         mycon.commit()
+        print(Fore.BLACK+Style.BRIGHT+'ACCOUNT DETAILS'.center(60)+Style.RESET_ALL)
         print(f'VC number= {vc} ')
         print(f'Registered mobile number= {mobile_no}')
         print(f'Registered mail id={mail}')
-        print(f'Total Recharge Amount= {price}')
-        print(f'Account Balance= {balance}')
+        print(f'Total Recharge Amount= Rs. {price}')
+        print(f'Account Balance= Rs. {balance}')
+        print(f'Last Payment= Rs.{balance} on {pay_date}')
+        print(f'Next recharge date= {next_recharge_date}')
 
     elif ans=='3':
         print('Logging Out...')
@@ -1068,6 +1079,7 @@ def time_period(am):
         if ans=='1':
             time_period(am)
         else:
+
             transaction(Total_amount)
     elif ch=='1':
         Total_amount = am*6
@@ -1139,8 +1151,8 @@ def transaction(total_amount):
             print('Press any key to skip the transaction, you can pay later by logging into your account')
             Ans=input('Enter your choice here: ')
             if Ans=='1':
-
-                query = f"insert into user_info(paid) values({total_amount});"
+                pay_date = date.today().isoformat()
+                query = f"insert into user_info(paid,pay_date) values({total_amount},'{pay_date}');"
                 mycursor.execute(query)
                 mycon.commit()
                 print('Payment made successfully!!')
