@@ -21,6 +21,7 @@ def menu():
     print("New User? Register Now. Press 2")
     print('Press 3 to explore our website!')
     print('Press 4 to view our SKYTOUCH Channel Guide')
+    print('Press 5 to contact us ')
     print('Press 0 to EXIT')
     ch = input('>>> ')
     if ch == '1':
@@ -33,6 +34,9 @@ def menu():
         home()
     elif ch == '4':
         guide()
+    elif ch=="5":
+        contact()
+
     else:
         print("Please enter a valid input.")
         menu()
@@ -62,6 +66,7 @@ def home():
         techandinfs()
     if ch == 4:
         whyus()
+
     else:
         print("please enter a valid choice")
     print("Do you want to know more about us.If yes press 0 else press any key to skip")
@@ -152,9 +157,15 @@ def whyus():
 
 def welcome(username):
     mycursor.execute(f"select price,paid from user_info where username = '{username}';")
-    recharge_Data=mycursor.fetchall() #price,paid
-    balance=recharge_Data[1]
-    price=recharge_Data[0]
+    recharge_Data=mycursor.fetchall()
+    if recharge_Data==[]:
+        pass
+    else:
+        balance = recharge_Data[1]
+        price = recharge_Data[0]
+    #price,paid
+    #print(recharge_Data)
+
     print(f'WELCOME {username}! ')
     print("PRESS 0 TO MODIFY YOUR PACKAGE")
     print('PRESS 1 TO RECHARGE YOUR ACCOUNT')
@@ -871,7 +882,7 @@ def selection_confirm(pack, price, U):
     print('Press 1 to change your selection')
     ans = input('Enter your choice here: ')
     if ans == '0':
-        query = f"insert into user_info values('{U}','{pack}',{price})"
+        query = f"insert into user_info(username,pack,price) values('{U}','{pack}',{price})"
         mycursor.execute(query)
         mycon.commit()
         print('Press 1 to make payment')
@@ -1070,8 +1081,9 @@ def time_period(am):
 def transaction(total_amount):
     print('#Make your payment HERE...##')
     print('Select the mode of payment')
-    print('Press 0 for Debit card.')
     print('Press 1 for net banking.')
+    print('Press 2 for Debit card.')
+
     ch=input('Enter your choice here: ')
     if ch=='1':
         print("## NET BANKING WINDOW ##")
@@ -1134,4 +1146,32 @@ def cvv():
     else:
         return Cvv
 
+def contact():
+    print('you can contact us for your  queries, providing feedback and registering complaint '.upper())
+    print("we are providing 24/7 service to our customers. feel free to contact us".upper())
+    print('press 1 to know about our contact  details else press any key to skip'.capitalize())
+    ch=input("enter your choice= ")
+    if ch=="1":
+        print("You can contact us through our mail provided below")
+        print("skytouch.clairie@gmail.com")
+    else:
+        menu()
+
+
+
 menu()
+print("do you want to explore more on our page".upper())
+print("if yes press 1 else press any key to exit".upper())
+ch=input("enter your choice= ".capitalize())
+if ch=="1":
+    menu()
+else:
+    print("##THANK YOU FOR VISITING OUR WEBSITE. NEVER STOP LEARNING AND HAVING FUN##")
+    print("HAVE A NICE DAY")
+
+
+
+#hello
+
+
+#thedefr
