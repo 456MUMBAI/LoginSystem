@@ -1,7 +1,7 @@
 from colorama import Fore, Style, Back
 import mysql.connector as ms
 from prettytable import PrettyTable
-from datetime import date, timedelta
+from datetime import date, timedelta, datetime
 
 # DATA
 mycon = ms.connect(host='db4free.net', user='clairie', passwd='education', charset='utf8', database='skytouch')
@@ -186,7 +186,7 @@ def welcome(username):
             print('Your account is already recharged. Thank You!')
             welcome(username)
         else:
-            time_period(price)
+            time_period(price,username)
     elif ans=='2':
         '''viewing profile to be made here!!!'''
         query = f"select vc,mail, mobile from reg where username={username};"
@@ -908,7 +908,7 @@ def selection_confirm(pack, price, U):
         print('Else press any key to skip payment, you can pay later by logging into your account.')
         ch=input('Enter your choice here: ')
         if ch=='1':
-            time_period(price)
+            time_period(price,U)
         else:
             query = f"insert into user_info(paid) values(0);"
             mycursor.execute(query)
@@ -1051,7 +1051,7 @@ def modify_confirm(pack, price, U):
     print('Press 1 to change your selection')
     ans = input('Enter your choice here: ')
     if ans == '0':
-        amount = time_period(price)
+        amount = time_period(price,U)
         query1=f"select paid from user_info where username='{U}';"
         mycursor.execute(query1)
         balance = mycursor.fetchall()
@@ -1066,7 +1066,7 @@ def modify_confirm(pack, price, U):
         print('Please enter a valid choice.')
         modify_confirm(pack, price, U)
 
-def time_period(am):
+def time_period(am,user):
     print("Select your Skytouch Recharge Time Period")
     print('############################################################################################################')
     print('## OFFERS ##')
@@ -1083,34 +1083,34 @@ def time_period(am):
         print(f'Your total amount = Rs. {Total_amount}')
         ans=input('Press 1 to change your time period else press any key to proceed : ')
         if ans=='1':
-            time_period(am)
+            time_period(am,user)
         else:
 
-            transaction(Total_amount)
+            transaction(Total_amount,user)
         return Total_amount
     elif ch=='1':
         Total_amount = am*6
         print(f'Your total amount = Rs. {Total_amount}')
         ans = input('Press 1 to change your time period else press any key to proceed : ')
         if ans == '1':
-            time_period(am)
+            time_period(am,user)
         else:
-            transaction(Total_amount)
+            transaction(Total_amount,user)
         return Total_amount
     elif ch=='2':
         Total_amount = am*12
         print(f'Your total amount = Rs. {Total_amount}')
         ans = input('Press 1 to change your time period else press any key to proceed : ')
         if ans == '1':
-            time_period(am)
+            time_period(am,user)
         else:
-            transaction(Total_amount)
+            transaction(Total_amount,user)
         return Total_amount
     else:
         print('Please enter a valid choice!!!')
-        time_period(am)
+        time_period(am,user)
 
-def transaction(total_amount):
+def transaction(total_amount,User):
     print('#Make your payment HERE...##')
     print('Select the mode of payment')
     print('Press 1 for net banking.')
@@ -1122,12 +1122,12 @@ def transaction(total_amount):
         print("## NET BANKING WINDOW ##")
         ans = input('Press 1 to change mode of payment else press any key to proceed: ')
         if ans=='1':
-            transaction(total_amount)
+            transaction(total_amount,User)
         else:
             net_banking()
             print(f'Your total amount is= Rs. {total_amount}')
             print(f'Press 1 to pay Rs. {total_amount}')
-            print('Else press any key to skip the transaction, you can pay later by logging into your account')
+            print('Press any key to skip the transaction, you can pay later by logging into your account')
             Ans = input('Enter your choice here: ')
             if Ans=='1':
                 pay_date = date.today().isoformat()
@@ -1137,6 +1137,7 @@ def transaction(total_amount):
                 print('Please Wait, your payment is in process...')
                 print("...Do not refresh the page... ")
                 print('Payment made successfully!!')
+                payment_confirmation(total_amount,User)
             else:
                 query = f"insert into user_info(paid) values(0);"
                 mycursor.execute(query)
@@ -1150,7 +1151,7 @@ def transaction(total_amount):
         print('## DEBIT CARD WINDOW ##')
         ans=input('Press 1 to change mode of payment else press any key to proceed: ')
         if ans=='1':
-            transaction(total_amount)
+            transaction(total_amount,User)
         else:
 
             Card_no= card_no()
@@ -1159,7 +1160,7 @@ def transaction(total_amount):
             CVV=cvv()
             print(f'Your total amount is= Rs. {total_amount}')
             print(f'Press 1 to pay Rs. {total_amount}')
-            print('Else press any key to skip the transaction, you can pay later by logging into your account')
+            print('Press any key to skip the transaction, you can pay later by logging into your account')
             Ans=input('Enter your choice here: ')
             if Ans=='1':
                 pay_date = date.today().isoformat()
@@ -1169,6 +1170,7 @@ def transaction(total_amount):
                 print('Please Wait, your payment is in process...')
                 print("...Do not refresh the page... ")
                 print('Payment made successfully!!')
+                payment_confirmation(total_amount,User)
             else:
                 query = f"insert into user_info(paid) values(0);"
                 mycursor.execute(query)
@@ -1184,14 +1186,9 @@ def transaction(total_amount):
         if ans=="1":
             print(f'Your total amount is= Rs. {total_amount}')
             print(f'Press 1 to pay Rs. {total_amount}')
-            print('Else press any key to skip the transaction, you can pay later by logging into your account')
+            print('Press any key to skip the transaction, you can pay later by logging into your account')
             Ans = input('Enter your choice here: ')
             if Ans == '1':
-
-                # query = f"insert into user_info(paid) values({total_amount});"
-                # mycursor.execute(query)
-                # mycon.commit()
-                # print('Payment made successfully!!')
                 pay_date = date.today().isoformat()
                 query = f"insert into user_info(paid,pay_date) values({total_amount},'{pay_date}');"
                 mycursor.execute(query)
@@ -1199,6 +1196,7 @@ def transaction(total_amount):
                 print('Please Wait, your payment is in process...')
                 print("...Do not refresh the page... ")
                 print('Payment made successfully!!')
+                payment_confirmation(total_amount,User)
             else:
                 query = f"insert into user_info(paid) values(0);"
                 mycursor.execute(query)
@@ -1206,10 +1204,10 @@ def transaction(total_amount):
 
                 menu()
         else:
-            transaction(total_amount)
+            transaction(total_amount,User)
     else:
         print('Please enter a valid choice!!')
-        transaction(total_amount)
+        transaction(total_amount,User)
 
 
 
@@ -1289,8 +1287,40 @@ def net_banking():
         print('Please enter a valid choice!!')
         net_banking()
 
-#def payment_confirmation():
+def payment_confirmation(t_amount,u):
+    from random import randint
+    import smtplib
 
+    reference_no=randint(10000000,99999999)
+    receipt_no=randint(1000,9999)
+    now=datetime.now()
+    t_date= now.strftime('%d %b %Y, %H:%M:%S')
+    query=f"select mail,vc from reg where username= '{u}',"
+    mycursor.execute(query)
+    mail,vc=mycursor.fetchall()
+    mycon.commit()
+
+    # create smtp session
+    s = smtplib.SMTP("smtp.gmail.com", 587)  # 587 is a port number
+    # start TLS for E-mail security
+    s.starttls()
+    # Log in to your gmail account
+    s.login("skytouch.clairie@gmail.com", "ceilotocco")
+
+    MSG=Style.BRIGHT+Fore.BLACK+' Payment Confirmation:SKYTOUCH '.center(60,'#')+Style.RESET_ALL+'\n' \
+        'Thank you.' \
+        'Your payment request has been successfully recorded. Please quote your transaction reference number for' \
+        'any queries relating to this request.\n'+' Transaction Details '.center(60,'#')+'\n\n'\
+        'Transaction status : SUCCESS\n' \
+        f'Transaction reference no : {reference_no} \n' \
+        f'Transaction date and time: {t_date} \n' \
+        f'VC number= {vc} \n' \
+        f'Receipt Number= {receipt_no} \n'\
+        f'Amount Paid= {t_amount} \n'
+    print()
+    print(MSG)
+    s.sendmail("skytouch.clairie@gmail.com", mail, MSG)
+    print('Payment slip has been sent to your registered mail id.Thank You!')
 
 
 
