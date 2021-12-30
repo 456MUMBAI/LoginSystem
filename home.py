@@ -1,7 +1,7 @@
 from colorama import Fore, Style, Back
 import mysql.connector as ms
 from prettytable import PrettyTable
-from datetime import date, timedelta
+from datetime import date, timedelta, datetime
 
 # DATA
 mycon = ms.connect(host='db4free.net', user='clairie', passwd='education', charset='utf8', database='skytouch')
@@ -1137,6 +1137,7 @@ def transaction(total_amount):
                 print('Please Wait, your payment is in process...')
                 print("...Do not refresh the page... ")
                 print('Payment made successfully!!')
+                payment_confirmation(total_amount)
             else:
                 query = f"insert into user_info(paid) values(0);"
                 mycursor.execute(query)
@@ -1169,6 +1170,7 @@ def transaction(total_amount):
                 print('Please Wait, your payment is in process...')
                 print("...Do not refresh the page... ")
                 print('Payment made successfully!!')
+                payment_confirmation(total_amount)
             else:
                 query = f"insert into user_info(paid) values(0);"
                 mycursor.execute(query)
@@ -1187,11 +1189,6 @@ def transaction(total_amount):
             print('Press any key to skip the transaction, you can pay later by logging into your account')
             Ans = input('Enter your choice here: ')
             if Ans == '1':
-
-                # query = f"insert into user_info(paid) values({total_amount});"
-                # mycursor.execute(query)
-                # mycon.commit()
-                # print('Payment made successfully!!')
                 pay_date = date.today().isoformat()
                 query = f"insert into user_info(paid,pay_date) values({total_amount},'{pay_date}');"
                 mycursor.execute(query)
@@ -1199,6 +1196,7 @@ def transaction(total_amount):
                 print('Please Wait, your payment is in process...')
                 print("...Do not refresh the page... ")
                 print('Payment made successfully!!')
+                payment_confirmation(total_amount)
             else:
                 query = f"insert into user_info(paid) values(0);"
                 mycursor.execute(query)
@@ -1289,9 +1287,25 @@ def net_banking():
         print('Please enter a valid choice!!')
         net_banking()
 
-def payment_confirmation():
-
-
+def payment_confirmation(t_amount):
+    from random import randint
+    reference_no=randint(10000000,99999999)
+    receipt_no=randint(1000,9999)
+    now=datetime.now()
+    t_date= now.strftime('%d %b %Y, %H:%M:%S')
+    print()
+    print(Style.BRIGHT+Fore.BLACK+' Payment Confirmation:SKYTOUCH '.center(55,'#')+Style.RESET_ALL)
+    print('''Thank you.
+    Your payment request has been successfully recorded. Please quote your transaction reference number for 
+    any queries relating to this request.''')
+    print()
+    print(' Transaction Details '.center(55,'#'))
+    print()
+    print('Transaction status : SUCCESS')
+    print(f'Transaction reference no : {reference_no}')
+    print(f'Transaction date and time: {t_date} ')
+    print(f'Receipt Number= {receipt_no}')
+    print(f'Amount Paid= {t_amount}')
 
 
 
