@@ -1090,6 +1090,8 @@ def time_period(am):
         time_period(am)
 
 def transaction(total_amount):
+    # global money
+    # money=total_amount
     print('#Make your payment HERE...##')
     print('Select the mode of payment')
     print('Press 1 for net banking.')
@@ -1102,7 +1104,24 @@ def transaction(total_amount):
         if ans=='1':
             transaction(total_amount)
         else:
-            '''net banking platform to be made here....'''
+            banking()
+            print(f'Your total amount is= Rs. {total_amount}')
+            print(f'Press 1 to pay Rs. {total_amount}')
+            print('Press any key to skip the transaction, you can pay later by logging into your account')
+            Ans = input('Enter your choice here: ')
+            if Ans == '1':
+
+                query = f"insert into user_info(paid) values({total_amount});"
+                mycursor.execute(query)
+                mycon.commit()
+                print('Payment made successfully!!')
+            else:
+                query = f"insert into user_info(paid) values(0);"
+                mycursor.execute(query)
+                mycon.commit()
+
+                menu()
+
 
     elif ch=='2':
         print('## DEBIT CARD WINDOW ##')
@@ -1172,6 +1191,51 @@ def contact():
     else:
         menu()
 
+"""network banking"""
+
+def banking1():
+    pswd = input("enter your password= ")
+    print("please wait.......".capitalize().center(50))
+    print("...do not refresh the page... ")
+
+
+
+def banking():
+    print("choose your bank".capitalize())
+    print("press 1 to select central bank of india".upper())
+    print("press 2 to select HDFC bank".upper())
+    print("press 3 to select pnb bank".upper())
+    print("press 4 to celect SBI")
+    ch = input("enter your choice= ")
+    if ch == "1":
+        customer_id = input("enter your customer id")
+        if len(customer_id) != 11:
+            print("invalid customer id")
+        else:
+            banking1()
+
+    if ch == "2":
+        customer_id = input("enter your customer id")
+        if len(customer_id) != 9:
+            print("invalid customer id")
+        else:
+            banking1()
+
+    if ch == "3":
+        customer_id = input("enter your customer id")
+        if len(customer_id) != 9:
+            print("invalid customer id")
+        else:
+            banking1()
+
+    if ch == "4":
+        customer_id = input("enter your customer id")
+        if len(customer_id) != 11:
+            print("invalid customer id")
+        else:
+            banking1()
+
+
 
 
 
@@ -1186,7 +1250,3 @@ else:
 
 
 menu()
-#hello
-
-
-#thedefr
