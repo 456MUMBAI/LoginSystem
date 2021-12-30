@@ -1102,8 +1102,6 @@ def time_period(am):
         time_period(am)
 
 def transaction(total_amount):
-    # global money
-    # money=total_amount
     print('#Make your payment HERE...##')
     print('Select the mode of payment')
     print('Press 1 for net banking.')
@@ -1117,23 +1115,26 @@ def transaction(total_amount):
         if ans=='1':
             transaction(total_amount)
         else:
-            banking()
+            net_banking()
             print(f'Your total amount is= Rs. {total_amount}')
             print(f'Press 1 to pay Rs. {total_amount}')
             print('Press any key to skip the transaction, you can pay later by logging into your account')
             Ans = input('Enter your choice here: ')
-            if Ans == '1':
-
-                query = f"insert into user_info(paid) values({total_amount});"
+            if Ans=='1':
+                pay_date = date.today().isoformat()
+                query = f"insert into user_info(paid,pay_date) values({total_amount},'{pay_date}');"
                 mycursor.execute(query)
                 mycon.commit()
+                print('Please Wait, your payment is in process...')
+                print("...Do not refresh the page... ")
                 print('Payment made successfully!!')
             else:
                 query = f"insert into user_info(paid) values(0);"
                 mycursor.execute(query)
                 mycon.commit()
 
-                menu()
+
+
 
 
     elif ch=='2':
@@ -1156,6 +1157,8 @@ def transaction(total_amount):
                 query = f"insert into user_info(paid,pay_date) values({total_amount},'{pay_date}');"
                 mycursor.execute(query)
                 mycon.commit()
+                print('Please Wait, your payment is in process...')
+                print("...Do not refresh the page... ")
                 print('Payment made successfully!!')
             else:
                 query = f"insert into user_info(paid) values(0);"
@@ -1163,7 +1166,7 @@ def transaction(total_amount):
                 mycon.commit()
 
                 menu()
-    if ch=="3":
+    elif ch=="3":
         print("UPI AutoPay is a new way to pay with UPI that will charge you automatically every month. That way you’ll never miss out on your shows and movies.")
         print("Now accepting: @upi, @paytm, @ibl, @axl, @ybl, @apl")
         upi=input("enter you UPI Id".capitalize())
@@ -1176,9 +1179,16 @@ def transaction(total_amount):
             Ans = input('Enter your choice here: ')
             if Ans == '1':
 
-                query = f"insert into user_info(paid) values({total_amount});"
+                # query = f"insert into user_info(paid) values({total_amount});"
+                # mycursor.execute(query)
+                # mycon.commit()
+                # print('Payment made successfully!!')
+                pay_date = date.today().isoformat()
+                query = f"insert into user_info(paid,pay_date) values({total_amount},'{pay_date}');"
                 mycursor.execute(query)
                 mycon.commit()
+                print('Please Wait, your payment is in process...')
+                print("...Do not refresh the page... ")
                 print('Payment made successfully!!')
             else:
                 query = f"insert into user_info(paid) values(0);"
@@ -1188,7 +1198,9 @@ def transaction(total_amount):
                 menu()
         else:
             transaction(total_amount)
-
+    else:
+        print('Please enter a valid choice!!')
+        transaction(total_amount)
 
 
 
@@ -1223,7 +1235,7 @@ def cvv():
 def contact():
     print('You can contact us for your  queries, provide feedback and register your complaint at any time. We are pleased to help you! '.upper())
     print("We provide 24/7 service to our customers. Feel free to contact us".upper())
-    print('Press 1 to know about our contact  details else press any key to skip'.capitalize())
+    print('Press 1 to know about our contact  details \nElse press any key to skip'.capitalize())
     ch=input("Enter your choice= ")
     if ch=="1":
         print("You can contact us through our mail provided below:-")
@@ -1231,62 +1243,47 @@ def contact():
     else:
         menu()
 
-"""network banking"""
 
-def banking1():
-    pswd = input("enter your password= ")
-    print("please wait.......".capitalize().center(50))
-    print("...do not refresh the page... ")
-
-
-
-def banking():
-    print("choose your bank".capitalize())
+def net_banking():
+    print("## Select your bank ##".capitalize())
     print("press 1 to select central bank of india".upper())
     print("press 2 to select HDFC bank".upper())
     print("press 3 to select pnb bank".upper())
-    print("press 4 to celect SBI")
-    ch = input("enter your choice= ")
+    print("press 4 to select SBI".upper())
+    ch = input("Enter your choice= ")
     if ch == "1":
         customer_id = input("enter your customer id")
         if len(customer_id) != 11:
-            print("invalid customer id")
+            print("Invalid customer id")
         else:
-            banking1()
-
-    if ch == "2":
+            pswd = input("enter your password= ")
+    elif ch == "2":
         customer_id = input("enter your customer id")
         if len(customer_id) != 9:
-            print("invalid customer id")
+            print("Invalid customer id")
         else:
-            banking1()
+            pswd = input("enter your password= ")
 
-    if ch == "3":
+    elif ch == "3":
         customer_id = input("enter your customer id")
         if len(customer_id) != 9:
-            print("invalid customer id")
+            print("Invalid customer id")
         else:
-            banking1()
-
-    if ch == "4":
+            pswd = input("enter your password= ")
+    elif ch == "4":
         customer_id = input("enter your customer id")
         if len(customer_id) != 11:
             print("invalid customer id")
         else:
-            banking1()
+            pswd = input("enter your password= ")
+    else:
+        print('Please enter a valid choice!!')
+        net_banking()
+
+def payment_confirmation():
 
 
 
-
-
-print("Do you want to explore more on our page".upper())
-print("If yes press 1 else press any key to exit".upper())
-ch=input("Enter your choice= ")
-if ch=="1":
-    menu()
-else:
-    print("##THANK YOU FOR VISITING OUR WEBSITE. NEVER STOP LEARNING AND HAVING FUN##")
-    print("HAVE A NICE DAY")
 
 
 menu()
