@@ -169,8 +169,6 @@ def welcome(username):
     except:
         pay_date='0000-00-00'
         next_recharge_date='0000-00-00'
-    #price,paid
-    #print(recharge_Data)
 
     print(f'WELCOME {username}! ')
     print("PRESS 0 TO MODIFY YOUR PACKAGE")
@@ -317,7 +315,7 @@ def otp(email,msg):
     # Log in to your gmail account
     s.login("skytouch.clairie@gmail.com", "ceilotocco22")
     OTP = random.randint(1000, 9999)
-    a=str(OTP)
+    # a=str(OTP)
     msg1 = msg+' Your OTP for validation is= ' + str(OTP)
 
     try:
@@ -328,13 +326,20 @@ def otp(email,msg):
         return 'invalid'
 
     # OTP verification program
-    iOTP = int(input('Enter the OTP: '))
-    if iOTP == OTP:
-        print('##OTP VERIFIED##')
-        # close smtp session
-        s.quit()
-        return 'verified', email
-    else:
+    try:
+        iOTP = int(input('Enter the OTP: '))
+        if iOTP == OTP:
+            print('##OTP VERIFIED##')
+            # close smtp session
+            s.quit()
+            return 'verified', email
+        else:
+            print('Invalid OTP!!!')
+            # close smtp session
+            s.quit()
+            return 'invalid'
+
+    except:
         print('Invalid OTP!!!')
         # close smtp session
         s.quit()
