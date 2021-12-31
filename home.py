@@ -1,7 +1,7 @@
-from colorama import Fore, Style, Back
 import mysql.connector as ms
 from prettytable import PrettyTable
 from datetime import date, timedelta, datetime
+from colorama import Fore, Style, Back
 
 # DATA
 mycon = ms.connect(host='db4free.net', user='clairie', passwd='education', charset='utf8', database='skytouch')
@@ -1131,7 +1131,7 @@ def transaction(total_amount,User):
             Ans = input('Enter your choice here: ')
             if Ans=='1':
                 pay_date = date.today().isoformat()
-                query = f"insert into user_info(paid,pay_date) values({total_amount},'{pay_date}');"
+                query=f"update user_info set paid={total_amount} ,pay_date='{pay_date}' where username='{User}';"
                 mycursor.execute(query)
                 mycon.commit()
                 print('Please Wait, your payment is in process...')
@@ -1139,7 +1139,7 @@ def transaction(total_amount,User):
                 print('Payment made successfully!!')
                 payment_confirmation(total_amount,User)
             else:
-                query = f"insert into user_info(paid) values(0);"
+                query = f"update user_info set paid={0};"
                 mycursor.execute(query)
                 mycon.commit()
 
@@ -1164,7 +1164,7 @@ def transaction(total_amount,User):
             Ans=input('Enter your choice here: ')
             if Ans=='1':
                 pay_date = date.today().isoformat()
-                query = f"insert into user_info(paid,pay_date) values({total_amount},'{pay_date}');"
+                query = f"update user_info set paid={total_amount},pay_date='{pay_date}' where username='{User}';"
                 mycursor.execute(query)
                 mycon.commit()
                 print('Please Wait, your payment is in process...')
@@ -1172,7 +1172,7 @@ def transaction(total_amount,User):
                 print('Payment made successfully!!')
                 payment_confirmation(total_amount,User)
             else:
-                query = f"insert into user_info(paid) values(0);"
+                query = f"update user_info set paid={0};"
                 mycursor.execute(query)
                 mycon.commit()
 
@@ -1190,7 +1190,7 @@ def transaction(total_amount,User):
             Ans = input('Enter your choice here: ')
             if Ans == '1':
                 pay_date = date.today().isoformat()
-                query = f"insert into user_info(paid,pay_date) values({total_amount},'{pay_date}');"
+                query = f"update user_info set paid={total_amount} ,pay_date='{pay_date}' where username='{User}';"
                 mycursor.execute(query)
                 mycon.commit()
                 print('Please Wait, your payment is in process...')
@@ -1198,7 +1198,7 @@ def transaction(total_amount,User):
                 print('Payment made successfully!!')
                 payment_confirmation(total_amount,User)
             else:
-                query = f"insert into user_info(paid) values(0);"
+                query = f"update user_info set paid={0};"
                 mycursor.execute(query)
                 mycon.commit()
 
