@@ -315,7 +315,7 @@ def otp(email,msg):
     # start TLS for E-mail security
     s.starttls()
     # Log in to your gmail account
-    s.login("skytouch.clairie@gmail.com", "ceilotocco")
+    s.login("skytouch.clairie@gmail.com", "ceilotocco22")
     OTP = random.randint(1000, 9999)
     a=str(OTP)
     msg1 = msg+' Your OTP for validation is= ' + str(OTP)
@@ -1305,7 +1305,7 @@ def payment_confirmation(t_amount,u):
     # start TLS for E-mail security
     s.starttls()
     # Log in to your gmail account
-    s.login("skytouch.clairie@gmail.com", "ceilotocco")
+    s.login("skytouch.clairie@gmail.com", "ceilotocco22")
 
     MSG=Style.BRIGHT+Fore.BLACK+' Payment Confirmation:SKYTOUCH '.center(60,'#')+Style.RESET_ALL+'\n' \
         'Thank you.' \
