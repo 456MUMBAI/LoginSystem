@@ -158,10 +158,10 @@ def whyus():
 
 def welcome(username):
     mycursor.execute(f"select price,paid,pay_date from user_info where username = '{username}';")
-    recharge_Data=mycursor.fetchall() #price,paid
+    recharge_Data=mycursor.fetchall()[0] #price,paid
     balance = recharge_Data[1]
     price = recharge_Data[0]
-    tenure=int(balance/price)
+    tenure=int((balance/price)*30)
 
     try:
         pay_date= recharge_Data[2]
@@ -189,15 +189,15 @@ def welcome(username):
             time_period(price,username)
     elif ans=='2':
         '''viewing profile to be made here!!!'''
-        query = f"select vc,mail, mobile from reg where username={username};"
+        query = f"select vc,mail, mobile from reg where username='{username}';"
         mycursor.execute(query)
-        vc, mail, mobile_no = mycursor.fetchall()
+        vc, mail, mobile_no = mycursor.fetchall()[0]
         mycon.commit()
         print(Fore.BLACK+Style.BRIGHT+'ACCOUNT DETAILS'.center(60)+Style.RESET_ALL)
         print(f'VC number= {vc} ')
         print(f'Registered mobile number= {mobile_no}')
         print(f'Registered mail id={mail}')
-        print(f'Total Recharge Amount= Rs. {price}')
+        print(f'Total Recharge Amount= Rs. {price} per month')
         print(f'Account Balance= Rs. {balance}')
         print(f'Last Payment= Rs.{balance} on {pay_date}')
         print(f'Next recharge date= {next_recharge_date}')
@@ -1295,9 +1295,9 @@ def payment_confirmation(t_amount,u):
     receipt_no=randint(1000,9999)
     now=datetime.now()
     t_date= now.strftime('%d %b %Y, %H:%M:%S')
-    query=f"select mail,vc from reg where username= '{u}',"
+    query=f"select mail,vc from reg where username= '{u}';"
     mycursor.execute(query)
-    mail,vc=mycursor.fetchall()
+    mail,vc=mycursor.fetchall()[0]
     mycon.commit()
 
     # create smtp session
