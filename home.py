@@ -7,11 +7,11 @@ from colorama import Fore, Style, Back
 mycon = ms.connect(host='db4free.net', user='clairie', passwd='education', charset='utf8', database='skytouch')
 print('connected!')
 mycursor = mycon.cursor()
-mycursor.execute('select * from login_info;')
-login_data = mycursor.fetchall()
-# print(login_data)
 mycursor.execute("select * from reg;")
-reg_data = mycursor.fetchall()
+reg_data1 = mycursor.fetchall()
+
+# print(login_data)
+
 
 
 
@@ -157,11 +157,12 @@ def whyus():
 # LOGIN FILE
 
 def welcome(username):
-    mycursor.execute(f"select price,paid,pay_date from user_info where username = '{username}';")
+    mycursor.execute(f"select price,paid,pay_date,pack from user_info where username = '{username}';")
     recharge_Data=mycursor.fetchall()[0] #price,paid
     balance = recharge_Data[1]
     price = recharge_Data[0]
     tenure=int((balance/price)*30)
+    pack=recharge_Data[3]
 
     try:
         pay_date= recharge_Data[2]
@@ -169,48 +170,54 @@ def welcome(username):
     except:
         pay_date='0000-00-00'
         next_recharge_date='0000-00-00'
-
     print(f'WELCOME {username}! ')
-    print("PRESS 0 TO MODIFY YOUR PACKAGE")
-    print('PRESS 1 TO RECHARGE YOUR ACCOUNT')
-    print('PRESS 2 TO VIEW YOUR PROFILE')
-    print('PRESS 3 TO LOG OUT')
-    ans = input("enter your choice here= ")
-    if ans == "0":
-        modify(username)
-    elif ans=='1':
-        print(f'Your account  balance is = Rs. {balance} ')
-        if balance!=0:
-            print('Your account is already recharged. Thank You!')
-            welcome(username)
-        else:
-            time_period(price,username)
-    elif ans=='2':
-        '''viewing profile to be made here!!!'''
-        query = f"select vc,mail, mobile from reg where username='{username}';"
-        mycursor.execute(query)
-        vc, mail, mobile_no = mycursor.fetchall()[0]
-        mycon.commit()
-        print(Fore.BLACK+Style.BRIGHT+'ACCOUNT DETAILS'.center(60)+Style.RESET_ALL)
-        print(f'VC number= {vc} ')
-        print(f'Registered mobile number= {mobile_no}')
-        print(f'Registered mail id={mail}')
-        print(f'Total Recharge Amount= Rs. {price} per month')
-        print(f'Account Balance= Rs. {balance}')
-        print(f'Last Payment= Rs.{balance} on {pay_date}')
-        print(f'Next recharge date= {next_recharge_date}')
+    while True:
+        print("PRESS 0 TO MODIFY YOUR PACKAGE")
+        print('PRESS 1 TO RECHARGE YOUR ACCOUNT')
+        print('PRESS 2 TO VIEW YOUR PROFILE')
+        print('PRESS 3 TO LOG OUT')
+        ans = input("enter your choice here= ")
+        if ans == "0":
+            modify(username)
+        elif ans=='1':
+            print(f'Your account  balance is = Rs. {balance} ')
+            if balance!=0:
+                print('Your account is already recharged. Thank You!')
+                welcome(username)
+            else:
+                time_period(price,username)
+        elif ans=='2':
+            '''viewing profile to be made here!!!'''
+            query = f"select vc,mail, mobile from reg where username='{username}';"
+            mycursor.execute(query)
+            vc, mail, mobile_no = mycursor.fetchall()[0]
+            mycon.commit()
+            print(Fore.BLACK+Style.BRIGHT+'ACCOUNT DETAILS'.center(60)+Style.RESET_ALL)
+            print(f'VC number= {vc} ')
+            print(f'Registered mobile number= {mobile_no}')
+            print(f'Registered mail id={mail}')
+            print(f'Your current pack is= {pack}')
+            print(f'Total Recharge Amount= Rs. {price} per month')
+            print(f'Account Balance= Rs. {balance}')
+            print(f'Last Payment= Rs.{balance} on {pay_date}')
+            print(f'Next recharge date= {next_recharge_date}')
+            print()
 
-    elif ans=='3':
-        print('Logging Out...')
-        menu()
-    else:
-        print('Please enter a valid choice!')
-        welcome(username)
+        elif ans=='3':
+            print('Logging Out...')
+            break
+
+        else:
+            print('Please enter a valid choice!')
+            welcome(username)
+    menu()
 
 
 def verify():
     """ To verify login details of the user."""
     print('##LOGIN DETAILS##')
+    mycursor.execute('select * from login_info;')
+    login_data = mycursor.fetchall()
     while True:
         user_name = input('USERNAME: ')
         if len(user_name) == 0:
@@ -235,7 +242,10 @@ def verify():
 
 def change_pswd():
     """To change password"""
+
     VC = input('Enter your VC number= ')
+    mycursor.execute("select * from reg;")
+    reg_data = mycursor.fetchall()
     try:
         if 100000 <= int(VC) <= 100000000000:
             for i in reg_data:
@@ -297,11 +307,12 @@ def fun():
     print('##THANK YOU FOR REGISTERING!!##')
     print('Please select your SKYTOUCH pack.')
     display(uname)
-    ch = input('Do you want to register another user?(y/n)= ').lower()
-    if ch == 'y':
-        fun()
-    else:
-        menu()
+    menu()
+    # ch = input('Do you want to register another user?(y/n)= ').lower()
+    # if ch == 'y':
+    #     fun()
+    # else:
+    #     menu()
 
 
 def otp(email,msg):
@@ -373,7 +384,7 @@ def username():
             loop2 = "y"
 
         else:
-            for i in reg_data:
+            for i in reg_data1:
                 if uname == i[2]:
                     print("This username already exists")
                     loop2 = "y"
@@ -414,7 +425,7 @@ def vc():
     """To generate unique vc number for every new customer."""
     import random
     vt = random.randrange(100000, 100000000000)
-    for i in reg_data:
+    for i in reg_data1:
         if str(vt) == i[0]:
             vt = random.randrange(100000, 1000000000)
     else:
@@ -915,8 +926,8 @@ def selection_confirm(pack, price, U):
         if ch=='1':
             time_period(price,U)
         else:
-            query = f"insert into user_info(paid) values(0);"
-            mycursor.execute(query)
+            query1 = f"update user_info set paid=0 where username='{U}';"
+            mycursor.execute(query1)
             mycon.commit()
             menu()
     elif ans == '1':
@@ -1144,7 +1155,7 @@ def transaction(total_amount,User):
                 print('Payment made successfully!!')
                 payment_confirmation(total_amount,User)
             else:
-                query = f"update user_info set paid={0};"
+                query = f"update user_info set paid=0;"
                 mycursor.execute(query)
                 mycon.commit()
 
@@ -1177,7 +1188,7 @@ def transaction(total_amount,User):
                 print('Payment made successfully!!')
                 payment_confirmation(total_amount,User)
             else:
-                query = f"update user_info set paid={0};"
+                query = f"update user_info set paid=0;"
                 mycursor.execute(query)
                 mycon.commit()
 
@@ -1187,8 +1198,10 @@ def transaction(total_amount,User):
               "That way you’ll never miss out on your shows and movies.")
         print("Now accepting: @upi, @paytm, @ibl, @axl, @ybl, @apl")
         upi=input("enter you UPI Id".capitalize())
-        print("press 1 to confirm your payment else press any key to edit")
+        print("press 1 to confirm your payment.")
+        print('press any key to skip payment. You can pay later on by logging into your account.')
         ans=input("enter your choice= ")
+
         if ans=="1":
             print(f'Your total amount is= Rs. {total_amount}')
             print(f'Press 1 to pay Rs. {total_amount}')
@@ -1204,13 +1217,16 @@ def transaction(total_amount,User):
                 print('Payment made successfully!!')
                 payment_confirmation(total_amount,User)
             else:
-                query = f"update user_info set paid={0};"
+                query = f"update user_info set paid=0;"
                 mycursor.execute(query)
                 mycon.commit()
 
                 menu()
         else:
-            transaction(total_amount,User)
+            query = f"update user_info set paid=0;"
+            mycursor.execute(query)
+            mycon.commit()
+            menu()
     else:
         print('Please enter a valid choice!!')
         transaction(total_amount,User)
