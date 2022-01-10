@@ -171,6 +171,7 @@ def welcome(username):
         pay_date='0000-00-00'
         next_recharge_date='0000-00-00'
     print(f'WELCOME {username}! ')
+    print()
     while True:
         print("PRESS 0 TO MODIFY YOUR PACKAGE")
         print('PRESS 1 TO RECHARGE YOUR ACCOUNT')
@@ -205,6 +206,7 @@ def welcome(username):
 
         elif ans=='3':
             print('Logging Out...')
+            print()
             break
 
         else:
@@ -215,7 +217,9 @@ def welcome(username):
 
 def verify():
     """ To verify login details of the user."""
-    print('##LOGIN DETAILS##')
+    print()
+    print(Style.BRIGHT+ '##LOGIN DETAILS##'.center(60)+Style.RESET_ALL)
+    print()
     mycursor.execute('select * from login_info;')
     login_data = mycursor.fetchall()
     while True:
@@ -305,7 +309,8 @@ def fun():
     mycon.commit()
 
     print('##THANK YOU FOR REGISTERING!!##')
-    print('Please select your SKYTOUCH pack.')
+    print()
+    print('Please select your SKYTOUCH pack...')
     display(uname)
     menu()
     # ch = input('Do you want to register another user?(y/n)= ').lower()
@@ -315,10 +320,14 @@ def fun():
     #     menu()
 
 
+
+
 def otp(email,msg):
     """otp generation and verification program"""
     import smtplib
     import random
+    from email.message import EmailMessage
+    MSG = EmailMessage()
     # create smtp session
     s = smtplib.SMTP("smtp.gmail.com", 587)  # 587 is a port number
     # start TLS for E-mail security
@@ -329,8 +338,14 @@ def otp(email,msg):
     # a=str(OTP)
     msg1 = msg+' Your OTP for validation is= ' + str(OTP)
 
+    MSG.set_content(msg1)
+    MSG['Subject'] = 'SKYTOUCH: OTP for verification'
+    MSG['From'] = "skytouch.clairie@gmail.com"
+    MSG['To'] = email
+
     try:
-        s.sendmail("skytouch.clairie@gmail.com", email, msg1)
+        # s.sendmail("skytouch.clairie@gmail.com", email, msg1)
+        s.send_message(MSG)
         print("OTP sent successfully to registered mail id...")
     except:
         print('Invalid Email')
@@ -340,7 +355,7 @@ def otp(email,msg):
     try:
         iOTP = int(input('Enter the OTP: '))
         if iOTP == OTP:
-            print('##OTP VERIFIED##')
+            print('OTP VERIFIED...')
             # close smtp session
             s.quit()
             return 'verified', email
@@ -356,6 +371,25 @@ def otp(email,msg):
         s.quit()
         return 'invalid'
 
+def email():
+    """to input email and verify it."""
+    mail = input("enter your e-mail: ")
+    if len(mail) == 0:
+        print('Invalid Email.')
+        email()
+    elif mail.isspace():
+        print('Invalid Email.')
+        email()
+    else:
+        message='''Dear User,
+        Thank you for registering at SKYTOUCH. We have received your request for registration.'''
+        ans = otp(mail,message)
+        if ans[0] == 'verified':
+
+            return ans[1]
+        else:
+            print('Please input your email again.')
+            email()
 
 def mobile():
     """To input mobile no. of user."""
@@ -386,7 +420,7 @@ def username():
         else:
             for i in reg_data1:
                 if uname == i[2]:
-                    print("This username already exists")
+                    print("This username already exists. Please select other username")
                     loop2 = "y"
                     break
             else:
@@ -447,25 +481,7 @@ def name():
             return name
 
 
-def email():
-    """to input email and verify it."""
-    mail = input("enter your e-mail: ")
-    if len(mail) == 0:
-        print('Invalid Email.')
-        email()
-    elif mail.isspace():
-        print('Invalid Email.')
-        email()
-    else:
-        msg='''Dear User,
-        Thank you for registering at SKYTOUCH. We have received your request for registration.'''
-        ans = otp(mail,msg)
-        if ans[0] == 'verified':
 
-            return ans[1]
-        else:
-            print('Please input your email again.')
-            email()
 
 
 def basicplanhindi():
@@ -799,10 +815,14 @@ def specialoffer():
 
 
 def display(user):
-    print('## PACK Display WINDOW ##')
+    print()
+    print(Style.BRIGHT+'## PACK Display WINDOW ##'.center(60)+Style.RESET_ALL)
+    print()
     print("## Please select your language preference ##")
+    print()
     print("Press 1 for hindi")
     print("Press 2 for english")
+    print()
     a = input("Enter your choice= ")
     print(
         Style.BRIGHT + Fore.LIGHTRED_EX + "*****************************************************************************************************************",
@@ -859,8 +879,11 @@ def display(user):
 
 
 def select(u):
-    print('## Pack SELECTION WINDOW ##')
+    print()
+    print(Style.BRIGHT+ '## Pack SELECTION WINDOW ##'.center(60)+Style.RESET_ALL)
+    print()
     print(f'Welcome {u}')
+    print()
     print('Press 0 to view our Skytouch Combos')
     print('Press 1 to select Basic Hindi Plan.')
     print('Press 2 to select Premium Hindi Plan.')
@@ -1312,15 +1335,19 @@ def net_banking():
 def payment_confirmation(t_amount,u):
     from random import randint
     import smtplib
+    from email.message import EmailMessage
 
     reference_no=randint(10000000,99999999)
     receipt_no=randint(1000,9999)
     now=datetime.now()
     t_date= now.strftime('%d %b %Y, %H:%M:%S')
+
     query=f"select mail,vc from reg where username= '{u}';"
     mycursor.execute(query)
     mail,vc=mycursor.fetchall()[0]
     mycon.commit()
+
+    msg = EmailMessage()
 
     # create smtp session
     s = smtplib.SMTP("smtp.gmail.com", 587)  # 587 is a port number
@@ -1329,22 +1356,29 @@ def payment_confirmation(t_amount,u):
     # Log in to your gmail account
     s.login("skytouch.clairie@gmail.com", "ceilotocco22")
 
-    MSG=Style.BRIGHT+Fore.BLACK+' Payment Confirmation:SKYTOUCH '.center(60,'#')+Style.RESET_ALL+'\n' \
+    MSG=' Payment Confirmation:SKYTOUCH '.center(60,'#')+'\n' \
         'Thank you.' \
         'Your payment request has been successfully recorded. Please quote your transaction reference number for' \
-        'any queries relating to this request.\n'+' Transaction Details '.center(60,'#')+'\n\n'\
+        'any queries relating to this request.\n\n'+' Transaction Details '.center(60,'#')+'\n\n'\
         'Transaction status : SUCCESS\n' \
         f'Transaction reference no : {reference_no} \n' \
         f'Transaction date and time: {t_date} \n' \
         f'VC number= {vc} \n' \
+        f'Username= {u} \n' \
         f'Receipt Number= {receipt_no} \n'\
         f'Amount Paid= {t_amount} \n'
     print()
     print(MSG)
-    s.sendmail("skytouch.clairie@gmail.com", mail, MSG)
+    msg.set_content(MSG)
+    msg['Subject'] = 'SKYTOUCH: PAYMENT CONFIRMATION RECEIPT'
+    msg['From'] = "skytouch.clairie@gmail.com"
+    msg['To'] = mail
+    s.send_message(msg)
     print('Payment slip has been sent to your registered mail id.Thank You!')
-
-#hj
+    print()
+    s.quit()
 
 
 menu()
+
+
