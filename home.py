@@ -1344,7 +1344,7 @@ def payment_confirmation(t_amount,u):
     s.sendmail("skytouch.clairie@gmail.com", mail, MSG)
     print('Payment slip has been sent to your registered mail id.Thank You!')
 
-
+#hj
 
 
 menu()
