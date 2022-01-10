@@ -188,7 +188,7 @@ def welcome(username):
             else:
                 time_period(price,username)
         elif ans=='2':
-            '''viewing profile to be made here!!!'''
+            ' View Profile'
             query = f"select vc,mail, mobile from reg where username='{username}';"
             mycursor.execute(query)
             vc, mail, mobile_no = mycursor.fetchall()[0]
@@ -199,7 +199,7 @@ def welcome(username):
             print(f'Registered mail id={mail}')
             print(f'Your current pack is= {pack}')
             print(f'Total Recharge Amount= Rs. {price} per month')
-            print(f'Account Balance= Rs. {balance}')
+            print(f'Amount paid= Rs. {balance}')
             print(f'Last Payment= Rs.{balance} on {pay_date}')
             print(f'Next recharge date= {next_recharge_date}')
             print()
@@ -255,7 +255,7 @@ def change_pswd():
             for i in reg_data:
                 if VC in i[0]:
                     user_info = i
-                    print('##CHANGE PASSWORD WINDOW##')
+                    print(Style.BRIGHT+'## CHANGE PASSWORD WINDOW ##'+Style.RESET_ALL)
                     msg='Dear User,' \
                         'We have received your request to change your SKYTOUCH account password.'
                     ans = otp(user_info[5],msg)
@@ -266,7 +266,7 @@ def change_pswd():
                         query2 = f"update reg set passwd='{new_pswd}' where VC='{user_info[0]}'"
                         mycursor.execute(query2)
                         mycon.commit()
-                        print('##Updated Password Successfully##')
+                        print('Updated Password Successfully!!!'.upper())
                         welcome(user_info[2])
                     else:
                         print('Invalid OTP!')
@@ -292,7 +292,7 @@ def change_pswd():
 
 def fun():
     """main function to store user data in the reg table"""
-    print('##REGISTRATION WINDOW##')
+    print(Style.BRIGHT+'## REGISTRATION WINDOW ##'.center(60)+Style.RESET_ALL)
     print('Dear Customer, please note our DTH service is only available in INDIA.')
     nm = name()
     uname = username()
@@ -308,7 +308,7 @@ def fun():
     mycursor.execute(query1)
     mycon.commit()
 
-    print('##THANK YOU FOR REGISTERING!!##')
+    print(Style.BRIGHT+'THANK YOU FOR REGISTERING!!'+Style.RESET_ALL)
     print()
     print('Please select your SKYTOUCH pack...')
     display(uname)
@@ -710,7 +710,7 @@ def familyplan():
     movies = PrettyTable(
         [Back.LIGHTYELLOW_EX + Style.BRIGHT + Fore.BLACK + '& pictures', 'Star gold HD', 'Star movies', 'Sony max',
          'zee cinema', 'sony pix"', 'WB', 'UTV Action', 'd2h hollywood', 'MNX', 'Movies Now', 'HBO' + Style.RESET_ALL])
-
+    print(movies)
     print(Style.BRIGHT + Fore.GREEN + '* SPORTS' + Style.RESET_ALL)
     sports = PrettyTable(
         [Back.LIGHTYELLOW_EX + Style.BRIGHT + Fore.BLACK + 'Star Sports 1', 'Star Sports 1 HD',
@@ -879,11 +879,8 @@ def display(user):
 
 
 def select(u):
-    print()
     print(Style.BRIGHT+ '## Pack SELECTION WINDOW ##'.center(60)+Style.RESET_ALL)
-    print()
     print(f'Welcome {u}')
-    print()
     print('Press 0 to view our Skytouch Combos')
     print('Press 1 to select Basic Hindi Plan.')
     print('Press 2 to select Premium Hindi Plan.')
@@ -1033,7 +1030,7 @@ def guide():
 
 # modify pack
 def modify(u):
-    print('## Pack MODIFICATION WINDOW ##')
+    print(Style.BRIGHT+'## Pack MODIFICATION WINDOW ##'.center(60)+Style.RESET_ALL)
     print("Press 0 to return to your profile.")
     print('Press 1 to select Basic Hindi Plan.')
     print('Press 2 to select Premium Hindi Plan.')
@@ -1106,13 +1103,13 @@ def modify_confirm(pack, price, U):
         modify_confirm(pack, price, U)
 
 def time_period(am,user):
-    print("Select your Skytouch Recharge Time Period")
-    print('############################################################################################################')
-    print('## OFFERS ##')
+    # print('############################################################################################################')
+    print(Style.BRIGHT+'## OFFERS FOR YOU! ##'.center(60)+Style.RESET_ALL)
     print('On 3 month recharge get 7 Days extra!!')
     print('On 6 month recharge get 15 Days extra!!')
     print('On 1 year recharge get 30 Days extra!!')
     print('###########################################################################################################')
+    print("Please select your Skytouch Recharge Time Period...")
     print("Press 0 to recharge for 3 months")
     print('Press 1 to recharge for 6 months')
     print('Press 2 to recharge for 1 year')
@@ -1150,7 +1147,7 @@ def time_period(am,user):
         time_period(am,user)
 
 def transaction(total_amount,User):
-    print('#Make your payment HERE...##')
+    print(Style.BRIGHT+'#Make your payment HERE...##'.center(60)+Style.RESET_ALL)
     print('Select the mode of payment')
     print('Press 1 for net banking.')
     print('Press 2 for Debit card.')
@@ -1158,7 +1155,7 @@ def transaction(total_amount,User):
 
     ch=input('Enter your choice here: ')
     if ch=='1':
-        print("## NET BANKING WINDOW ##")
+        print(Style.BRIGHT+"## NET BANKING WINDOW ##".center(60)+Style.RESET_ALL)
         ans = input('Press 1 to change mode of payment else press any key to proceed: ')
         if ans=='1':
             transaction(total_amount,User)
@@ -1187,7 +1184,7 @@ def transaction(total_amount,User):
 
 
     elif ch=='2':
-        print('## DEBIT CARD WINDOW ##')
+        print(Style.BRIGHT+'## DEBIT CARD WINDOW ##'.center(60)+Style.RESET_ALL)
         ans=input('Press 1 to change mode of payment else press any key to proceed: ')
         if ans=='1':
             transaction(total_amount,User)
@@ -1217,10 +1214,11 @@ def transaction(total_amount,User):
 
                 menu()
     elif ch=="3":
+        print(Style.BRIGHT+'## UPI WINDOW ##'.center(60)+Style.RESET_ALL)
         print("UPI AutoPay is a new way to pay with UPI that will charge you automatically every month. "
               "That way you’ll never miss out on your shows and movies.")
         print("Now accepting: @upi, @paytm, @ibl, @axl, @ybl, @apl")
-        upi=input("enter you UPI Id".capitalize())
+        upi=input("enter you UPI Id= ".capitalize())
         if len(upi)==14 or len(upi)==16:
             if upi[10]=="@":
                 print("press 1 to confirm your payment.")
@@ -1258,8 +1256,6 @@ def transaction(total_amount,User):
         else:
             print('Please enter a valid choice!!')
             transaction(total_amount, User)
-
-# changes have been made
 
 
 
