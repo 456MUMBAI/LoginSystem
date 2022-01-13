@@ -1085,18 +1085,92 @@ def modify(u):
 def modify_confirm(pack, price, U):
     print('Press 0 to confirm your selection.')
     print('Press 1 to change your selection')
-    ans = input('Enter your choice here: ')
-    if ans == '0':
-        amount = time_period(price,U)
-        query1=f"select paid from user_info where username='{U}';"
+    ans1 = input('Enter your choice here: ')
+    if ans1 == '0':
+        # amount = time_period(price,U)
+        query1 = f"select paid from user_info where username='{U}';"
         mycursor.execute(query1)
-        balance = mycursor.fetchall()
+        data = mycursor.fetchall()
+        balance = data[0][0]
         mycon.commit()
-        final=int(amount-balance)
-        query = f"update user_info set pack='{pack}',paid='{final}' where username='{U}';"
-        mycursor.execute(query)
-        mycon.commit()
-    elif ans == '1':
+        # print(balance)
+        # print(type(balance))
+        ans="y"
+        while ans=="y":
+            print(Style.BRIGHT + '## OFFERS FOR YOU! ##'.center(60) + Style.RESET_ALL)
+            print('On 3 month recharge get 7 Days extra!!')
+            print('On 6 month recharge get 15 Days extra!!')
+            print('On 1 year recharge get 30 Days extra!!')
+            print(
+                '###########################################################################################################')
+            print("Please select your Skytouch Recharge Time Period...")
+            print("Press 0 to recharge for 3 months")
+            print('Press 1 to recharge for 6 months')
+            print('Press 2 to recharge for 1 year')
+            ch = input('Enter your choice here: ')
+            if ch == '0':
+                ans = "n"
+                Total_amount = price * 3
+                print(f'Your total amount = Rs. {Total_amount}')
+                final = int(Total_amount - balance)
+                print("The amount that you have to pay is", final)
+                if final<0:
+                    print("Your amount will be given within 7 days ".capitalize())
+                    query = f"update user_info set pack='{pack}',paid={Total_amount},price={price} where username='{U}';"
+                    mycursor.execute(query)
+                    mycon.commit()
+                    welcome(U)
+                else:
+                    query = f"update user_info set pack='{pack}',price={price} where username='{U}';"
+                    mycursor.execute(query)
+                    mycon.commit()
+                    transaction(final, U)
+
+
+
+            elif ch == '1':
+                ans = "n"
+                Total_amount = price * 6
+                print(f'Your total amount = Rs. {Total_amount}')
+                final = int(Total_amount - balance)
+                print("The amount that you have to pay is", final)
+                if final<0:
+                    print("Your  amount will be given within 7 days ".capitalize())
+                    query = f"update user_info set pack='{pack}',paid={Total_amount},price={price} where username='{U}';"
+                    mycursor.execute(query)
+                    mycon.commit()
+                    welcome(U)
+                else:
+                    query = f"update user_info set pack='{pack}',price={price} where username='{U}';"
+                    mycursor.execute(query)
+                    mycon.commit()
+                    transaction(final, U)
+
+
+            elif ch == '2':
+                ans="n"
+                Total_amount = price * 12
+                print(f'Your total amount = Rs. {Total_amount}')
+                final = int(Total_amount - balance)
+                print("The amount that you have to pay is", final)
+                if final<0:
+                    print("Your  amount will be given within 7 days ".capitalize())
+                    query = f"update user_info set pack='{pack}',paid={Total_amount},price={price} where username='{U}';"
+                    mycursor.execute(query)
+                    mycon.commit()
+                    welcome(U)
+                else:
+                    query = f"update user_info set pack='{pack}',price={price} where username='{U}';"
+                    mycursor.execute(query)
+                    mycon.commit()
+                    transaction(final, U)
+
+            else:
+                print('Please enter a valid choice!!!')
+                ans="y"
+
+
+    elif ans1 == '1':
         modify(U)
     else:
         print('Please enter a valid choice.')
@@ -1167,7 +1241,7 @@ def transaction(total_amount,User):
             Ans = input('Enter your choice here: ')
             if Ans=='1':
                 pay_date = date.today().isoformat()
-                query=f"update user_info set paid={total_amount} ,pay_date='{pay_date}' where username='{User}';"
+                query=f"update user_info set paid={total_amount},pay_date='{pay_date}' where username='{User}';"
                 mycursor.execute(query)
                 mycon.commit()
                 print('Please Wait, your payment is in process...')
