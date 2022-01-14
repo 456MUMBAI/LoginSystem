@@ -1175,6 +1175,11 @@ def modify_confirm(pack, price, U):
     else:
         print('Please enter a valid choice.')
         modify_confirm(pack, price, U)
+    print()
+    print('*****************************************************************')
+    print("Please login again to view the changes in your profile".upper())
+    print('*************************************************************')
+    print()
 
 def time_period(am,user):
     # print('############################################################################################################')
