@@ -1,3 +1,4 @@
+
 import mysql.connector as ms
 from prettytable import PrettyTable
 from datetime import date, timedelta, datetime
@@ -77,11 +78,7 @@ def home():
     else:
         print("THANK YOU FOR SHOWING INTEREST TO KNOW MORE ABOUT US")
         print("HAVE A NICE DAY")
-        print()
-        print('*********************************')
-        menu()
-        print('*********************************')
-        print()
+
 
 def vision():
     print(Style.BRIGHT + Fore.RED + "VISION AND MISSION".center(90), Style.RESET_ALL)
@@ -1053,8 +1050,7 @@ def guide():
                  [Style.BRIGHT + 'Hungama', 'POGO', 'Disney', 'Nicklodeon', 'nick jr.', 'Cartoon Network', 'Disney XD',
                   'Baby\'s TV' + Style.RESET_ALL])
     print(d)
-    print()
-    menu()
+
 
 # modify pack
 def modify(u):
@@ -1403,7 +1399,7 @@ def transaction(total_amount,User):
 
                     menu()
             else:
-                print('Please enter valid id!!')
+                print('Please enter a valid choice!!')
                 transaction(total_amount, User)
         elif ch=='0':
             query1 = f"select paid from user_info where username ='{User}'"
@@ -1418,11 +1414,9 @@ def transaction(total_amount,User):
 
             menu()
         else:
-            print('Please enter valid id!!')
+            print('Please enter a valid choice!!')
             transaction(total_amount, User)
-    print()
-    print("login again to view changes in your profile".upper())
-    print()
+
 
 
 def card_no():
@@ -1461,8 +1455,6 @@ def contact():
     if ch=="1":
         print("You can contact us through our mail provided below:-")
         print(Style.BRIGHT+"skytouch.clairie@gmail.com"+Style.RESET_ALL)
-        print()
-        menu()
     else:
         menu()
 
@@ -1551,4 +1543,5 @@ def payment_confirmation(t_amount,u):
 
 
 menu()
+
 
