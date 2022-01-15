@@ -216,3 +216,44 @@
 #     print('in file 1: temp1')
 # fun1()
 # temp.fun2()
+
+
+print("Now accepting: @upi, @paytm, @ibl, @axl, @ybl, @apl")
+upi = input("enter you UPI Id".capitalize())
+if len(upi) == 14 or len(upi) == 16:
+    if upi[10] == "@":
+        print("press 1 to confirm your payment.")
+        print('press any key to skip payment. You can pay later on by logging into your account.')
+        ans = input("enter your choice= ")
+
+        if ans == "1":
+            print(f'Your total amount is= Rs. {total_amount}')
+            print(f'Press 1 to pay Rs. {total_amount}')
+            print('Press any key to skip the transaction, you can pay later by logging into your account')
+            Ans = input('Enter your choice here: ')
+            if Ans == '1':
+                pay_date = date.today().isoformat()
+                query = f"update user_info set paid={total_amount} ,pay_date='{pay_date}' where username='{User}';"
+                mycursor.execute(query)
+                mycon.commit()
+                print('Please Wait, your payment is in process...')
+                print("...Do not refresh the page... ")
+                print('Payment made successfully!!')
+                payment_confirmation(total_amount, User)
+            else:
+                query = f"update user_info set paid=0;"
+                mycursor.execute(query)
+                mycon.commit()
+
+                menu()
+        else:
+            query = f"update user_info set paid=0;"
+            mycursor.execute(query)
+            mycon.commit()
+            menu()
+    else:
+        print('Please enter a valid choice!!')
+        transaction(total_amount, User)
+else:
+    print('Please enter a valid choice!!')
+    transaction(total_amount, User)
