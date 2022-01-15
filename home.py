@@ -1330,12 +1330,14 @@ def transaction(total_amount,User):
                     mycon.commit()
                     menu()
             else:
-                print('Please enter a valid choice!!')
+                print('Please enter valid id!!')
                 transaction(total_amount, User)
         else:
-            print('Please enter a valid choice!!')
+            print('Please enter valid id!!')
             transaction(total_amount, User)
-
+    print()
+    print("login again to view changes in your profile".upper())
+    print()
 
 
 def card_no():
@@ -1462,5 +1464,4 @@ def payment_confirmation(t_amount,u):
 
 
 menu()
-
 
