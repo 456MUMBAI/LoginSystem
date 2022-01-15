@@ -77,7 +77,11 @@ def home():
     else:
         print("THANK YOU FOR SHOWING INTEREST TO KNOW MORE ABOUT US")
         print("HAVE A NICE DAY")
-
+        print()
+        print('*********************************')
+        menu()
+        print('*********************************')
+        print()
 
 def vision():
     print(Style.BRIGHT + Fore.RED + "VISION AND MISSION".center(90), Style.RESET_ALL)
@@ -1026,7 +1030,8 @@ def guide():
                  [Style.BRIGHT + 'Hungama', 'POGO', 'Disney', 'Nicklodeon', 'nick jr.', 'Cartoon Network', 'Disney XD',
                   'Baby\'s TV' + Style.RESET_ALL])
     print(d)
-
+    print()
+    menu()
 
 # modify pack
 def modify(u):
@@ -1376,6 +1381,8 @@ def contact():
     if ch=="1":
         print("You can contact us through our mail provided below:-")
         print(Style.BRIGHT+"skytouch.clairie@gmail.com"+Style.RESET_ALL)
+        print()
+        menu()
     else:
         menu()
 
