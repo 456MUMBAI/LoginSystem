@@ -202,7 +202,9 @@ def welcome(username):
                 print('Your account is already recharged. Thank You!')
                 # welcome(username)
             else:
-                time_period(price,username)
+                amount=(time_period(price,username))
+                #print(amount)
+                transaction(amount,username)
         elif ans=='2':
             ' View Profile'
             query = f"select vc,mail, mobile from reg where username='{username}';"
