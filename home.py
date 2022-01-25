@@ -1,4 +1,4 @@
-#hello
+# hello
 import mysql.connector as ms
 from prettytable import PrettyTable
 from datetime import date, timedelta, datetime
@@ -6,14 +6,9 @@ from colorama import Fore, Style, Back
 
 # DATA
 mycon = ms.connect(host='db4free.net', user='clairie', passwd='education', charset='utf8', database='skytouch')
-print('connected!')
 mycursor = mycon.cursor()
 mycursor.execute("select * from reg;")
 reg_data1 = mycursor.fetchall()
-
-# print(login_data)
-
-
 
 
 def menu():
@@ -38,7 +33,7 @@ def menu():
         home()
     elif ch == '4':
         guide()
-    elif ch=="5":
+    elif ch == "5":
         contact()
 
     else:
@@ -57,7 +52,7 @@ def Exit():
 def home():
     """Home Page"""
     print(Style.BRIGHT + Fore.RED + "ABOUT US".center(85), Style.RESET_ALL)
-    print("To know more about our vission and mission. Press 1")
+    print("To know more about our vision and mission. Press 1")
     print("To know more about our core values. Press 2")
     print("To know more about our technology and infrastructure. Press 3")
     print("To know why you should select us as your DTH service provider. Press 4")
@@ -86,35 +81,46 @@ def home():
 def vision():
     print(Style.BRIGHT + Fore.RED + "VISION AND MISSION".center(90), Style.RESET_ALL)
     print(
-        Style.NORMAL + Fore.LIGHTYELLOW_EX + "Everything is rapidly changing so to keep pace with these changes, one has to make modifications in how things work, so they can be taken to the advanced level. ",
+        Style.NORMAL + Fore.LIGHTYELLOW_EX + "Everything is rapidly changing so to keep pace with these changes, "
+                                             "one has to make modifications in how things work, so they can be taken to"
+                                             " the advanced level. ",
         Style.RESET_ALL)
     print(
-        Style.NORMAL + Fore.LIGHTYELLOW_EX + "With this mindset we have built our DTH which is not only  user-friendly  but affordable.",
+        Style.NORMAL + Fore.LIGHTYELLOW_EX + "With this mindset we have built our DTH which is not only  user-friendly"
+                                             "  but affordable.",
         Style.RESET_ALL)
     print(
-        Style.NORMAL + Fore.LIGHTYELLOW_EX + "We are keen on providing the best service to our customers. With SKYTOUCH cable connection one can ensure their security.",
+        Style.NORMAL + Fore.LIGHTYELLOW_EX + "We are keen on providing the best service to our customers. With SKYTOUCH"
+                                             " cable connection one can ensure their security.",
         Style.RESET_ALL)
     print(
-        Style.NORMAL + Fore.LIGHTYELLOW_EX + "Entertainment in one's life is something that can't be ignored, but due to high cost of tv packages and a busy schedule of people, many people are drained out of this joy.",
+        Style.NORMAL + Fore.LIGHTYELLOW_EX + "Entertainment in one's life is something that can't be ignored, "
+                                             "but due to high cost of tv packages and a busy schedule of people, "
+                                             "many people are drained out of this joy.",
         Style.RESET_ALL)
     print(
-        Style.NORMAL + Fore.LIGHTYELLOW_EX + "Therefore, our DTH service has come up with low cost packages and 24/7 services",
+        Style.NORMAL + Fore.LIGHTYELLOW_EX + "Therefore, our DTH service has come up with low cost packages and 24/7 "
+                                             "services",
         Style.RESET_ALL)
 
 
 def core_values():
     print(Style.BRIGHT + Fore.GREEN + "OUR CORE VALUES".center(90), Style.RESET_ALL)
     print(
-        Style.NORMAL + Fore.LIGHTYELLOW_EX + "To work together effectively and efficiently realizing organisational objectives with a sense of shared accomplishment.",
+        Style.NORMAL + Fore.LIGHTYELLOW_EX + "To work together effectively and efficiently realizing organisational "
+                                             "objectives with a sense of shared accomplishment.",
         Style.RESET_ALL)
     print(
-        Style.NORMAL + Fore.LIGHTYELLOW_EX + "To act rapidly and deliver on responsibilities while anticipating and responding to the dynamic environment.",
+        Style.NORMAL + Fore.LIGHTYELLOW_EX + "To act rapidly and deliver on responsibilities while anticipating and "
+                                             "responding to the dynamic environment.",
         Style.RESET_ALL)
     print(
-        Style.NORMAL + Fore.LIGHTYELLOW_EX + "To embrace each individual’s unique talents, diverse life choices and work styles. To be fair, humble, honest, transparent and ethical in conduct.",
+        Style.NORMAL + Fore.LIGHTYELLOW_EX + "To embrace each individual’s unique talents, diverse life choices and "
+                                             "work styles. To be fair, humble, honest, transparent and ethical in conduct.",
         Style.RESET_ALL)
     print(
-        Style.NORMAL + Fore.LIGHTYELLOW_EX + "To generate, encourage and implement unconventional & novel ideas/technology continuously which fuel business growth.",
+        Style.NORMAL + Fore.LIGHTYELLOW_EX + "To generate, encourage and implement unconventional & novel ideas/technology"
+                                             " continuously which fuel business growth.",
         Style.RESET_ALL)
     print(Style.NORMAL + Fore.LIGHTYELLOW_EX + "Some core values that makes us different", Style.RESET_ALL)
 
@@ -122,24 +128,31 @@ def core_values():
 def techandinfs():
     print(Style.BRIGHT + Fore.CYAN + "Technology and Infrastructure".center(90), Style.RESET_ALL)
     print(
-        Style.NORMAL + Fore.LIGHTYELLOW_EX + " SKYTOUCH serves its customers with a passion, always endeavours to offer its customers with exceptional picture quality, stereophonic sound along with unmatched services.",
+        Style.NORMAL + Fore.LIGHTYELLOW_EX + " SKYTOUCH serves its customers with a passion, always endeavours to offer"
+                                             " its customers with exceptional picture quality, stereophonic sound along "
+                                             "with unmatched services.",
         Style.RESET_ALL)
     print(Style.NORMAL + Fore.LIGHTYELLOW_EX + "Believing in the quote",
           Style.BRIGHT + Fore.LIGHTRED_EX + "Best choices come with best rewards",
-          Style.NORMAL + Fore.LIGHTYELLOW_EX + " the brand offers the finest to its customers with its best-in-class technology and infrastructure",
+          Style.NORMAL + Fore.LIGHTYELLOW_EX + " the brand offers the finest to its customers with its best-in-class "
+                                               "technology and infrastructure",
           Style.RESET_ALL)
     print(Style.NORMAL + Fore.LIGHTCYAN_EX + "* Digital Picture Quality and Stereophonic Sound" +
           Style.RESET_ALL)
     print(
-        Style.NORMAL + Fore.MAGENTA + "Delivering maximum entertainment right in their homes, SKYTOUCH offers its customers with unmatched picture quality and superb sound experience." +
+        Style.NORMAL + Fore.MAGENTA + "Delivering maximum entertainment right in their homes, SKYTOUCH offers its"
+                                      " customers with unmatched picture quality and superb sound experience." +
         Style.RESET_ALL)
     print(Style.NORMAL + Fore.LIGHTCYAN_EX + "* Geographic Mobility" + Style.RESET_ALL)
     print(
-        Style.NORMAL + Fore.MAGENTA + "The full-fledged all India coverage of SKYTOUCH ensures that entertainment is reached in every nook and corner of the country along with uninterrupted services and nonstop access to all channels." +
+        Style.NORMAL + Fore.MAGENTA + "The full-fledged all India coverage of SKYTOUCH ensures that entertainment is "
+                                      "reached in every nook and corner of the country along with uninterrupted services "
+                                      "and nonstop access to all channels." +
         Style.RESET_ALL)
     print(Style.NORMAL + Fore.LIGHTCYAN_EX + "* Flexible Recharge Option" + Style.RESET_ALL)
     print(
-        Style.NORMAL + Fore.MAGENTA + "SKYTOUCH offers you a range of recharge offers that are designed to provide maximum value for money where you can select and pay for channels of your choice",
+        Style.NORMAL + Fore.MAGENTA + "SKYTOUCH offers you a range of recharge offers that are designed to provide "
+                                      "maximum value for money where you can select and pay for channels of your choice",
         Style.RESET_ALL)
 
 
@@ -149,9 +162,10 @@ def whyus():
           Style.RESET_ALL)
     print(Style.NORMAL + Fore.LIGHTGREEN_EX + "At your service 24*7. Call ,e-mail or chat with us", Style.RESET_ALL)
     print(
-        Style.NORMAL + Fore.LIGHTGREEN_EX + "Non stop entertainement with easy recharge options. Availability of wallets , dealers etc.",
+        Style.NORMAL + Fore.LIGHTGREEN_EX + "Non stop entertainment with easy recharge options. Availability of wallets ,"
+                                            " dealers etc.",
         Style.RESET_ALL)
-    print(Style.NORMAL + Fore.LIGHTGREEN_EX + "We provide our cutomers with refund if they do not like your service",
+    print(Style.NORMAL + Fore.LIGHTGREEN_EX + "We provide our customers with refund if they do not like your service",
           Style.RESET_ALL)
     print(
         Style.NORMAL + Fore.LIGHTGREEN_EX + "Our customers can cancel their plan anytime and modify it without any troubles",
@@ -161,19 +175,6 @@ def whyus():
 # LOGIN FILE
 
 def welcome(username):
-    # mycursor.execute(f"select price,paid,pay_date,pack from user_info where username = '{username}';")
-    # recharge_Data=mycursor.fetchall()[0] #price,paid
-    # balance = recharge_Data[1]
-    # price = recharge_Data[0]
-    # tenure=int((balance/price)*30)
-    # pack=recharge_Data[3]
-    #
-    # try:
-    #     pay_date= recharge_Data[2]
-    #     next_recharge_date = (pay_date + timedelta(days=tenure)).isoformat()
-    # except:
-    #     pay_date='0000-00-00'
-    #     next_recharge_date='0000-00-00'
     print(f'WELCOME {username}! ')
     print()
     while True:
@@ -191,7 +192,6 @@ def welcome(username):
             pay_date = '0000-00-00'
             next_recharge_date = '0000-00-00'
 
-
         print("PRESS 0 TO MODIFY YOUR PACKAGE")
         print('PRESS 1 TO RECHARGE YOUR ACCOUNT')
         print('PRESS 2 TO VIEW YOUR PROFILE')
@@ -199,22 +199,21 @@ def welcome(username):
         ans = input("enter your choice here= ")
         if ans == "0":
             modify(username)
-        elif ans=='1':
+        elif ans == '1':
             print(f'Your account  balance is = Rs. {balance} ')
-            if balance!=0:
+            if balance != 0:
                 print('Your account is already recharged. Thank You!')
-                # welcome(username)
             else:
-                amount=(time_period(price,username))
-                #print(amount)
-                transaction(amount,username)
-        elif ans=='2':
+                amount = (time_period(price, username))
+                # print(amount)
+                transaction(amount, username)
+        elif ans == '2':
             ' View Profile'
             query = f"select vc,mail, mobile from reg where username='{username}';"
             mycursor.execute(query)
             vc, mail, mobile_no = mycursor.fetchall()[0]
             mycon.commit()
-            print(Fore.BLACK+Style.BRIGHT+'ACCOUNT DETAILS'.center(60)+Style.RESET_ALL)
+            print(Fore.BLACK + Style.BRIGHT + 'ACCOUNT DETAILS'.center(60) + Style.RESET_ALL)
             print(f'VC number= {vc} ')
             print(f'Registered mobile number= {mobile_no}')
             print(f'Registered mail id={mail}')
@@ -225,7 +224,7 @@ def welcome(username):
             print(f'Next recharge date= {next_recharge_date}')
             print()
 
-        elif ans=='3':
+        elif ans == '3':
             print('Logging Out...')
             print()
             break
@@ -239,7 +238,7 @@ def welcome(username):
 def verify():
     """ To verify login details of the user."""
     print()
-    print(Style.BRIGHT+ '##LOGIN DETAILS##'.center(60)+Style.RESET_ALL)
+    print(Style.BRIGHT + '##LOGIN DETAILS##'.center(60) + Style.RESET_ALL)
     print()
     mycursor.execute('select * from login_info;')
     login_data = mycursor.fetchall()
@@ -276,10 +275,10 @@ def change_pswd():
             for i in reg_data:
                 if VC in i[0]:
                     user_info = i
-                    print(Style.BRIGHT+'## CHANGE PASSWORD WINDOW ##'+Style.RESET_ALL)
-                    msg='Dear User,' \
-                        'We have received your request to change your SKYTOUCH account password.'
-                    ans = otp(user_info[5],msg)
+                    print(Style.BRIGHT + '## CHANGE PASSWORD WINDOW ##' + Style.RESET_ALL)
+                    msg = 'Dear User,' \
+                          'We have received your request to change your SKYTOUCH account password.'
+                    ans = otp(user_info[5], msg)
                     if ans[0] == 'verified':
                         new_pswd = password()
                         query1 = f"update login_info set password='{new_pswd}' where username='{user_info[2]}'"
@@ -311,7 +310,7 @@ def change_pswd():
 
 # REGISTRATION FILE
 
-def otp(mail,msg):
+def otp(mail, msg):
     """otp generation and verification program"""
     import smtplib
     import random
@@ -324,8 +323,7 @@ def otp(mail,msg):
     # Log in to your gmail account
     s.login("skytouch.clairie@gmail.com", "ceilotocco22")
     OTP = random.randint(1000, 9999)
-    # a=str(OTP)
-    msg1 = msg+' Your OTP for validation is= ' + str(OTP)
+    msg1 = msg + ' Your OTP for validation is= ' + str(OTP)
 
     MSG.set_content(msg1)
     MSG['Subject'] = 'SKYTOUCH: OTP for verification'
@@ -346,7 +344,7 @@ def otp(mail,msg):
         if iOTP == OTP:
             print('OTP VERIFIED...')
             # close smtp session
-            #s.quit()
+            # s.quit()
             print(mail)
             return 'verified', mail
         else:
@@ -361,11 +359,12 @@ def otp(mail,msg):
         s.quit()
         return 'invalid'
 
+
 def email():
     """to input email and verify it."""
 
     mail = input("enter your e-mail: ")
-    print("hello",mail)
+    print("hello", mail)
 
     if len(mail) == 0:
         print('Invalid Email.')
@@ -374,38 +373,32 @@ def email():
         print('Invalid Email.')
         email()
     else:
-        message='''Dear User,
+        message = '''Dear User,
         Thank you for registering at SKYTOUCH. We have received your request for registration.'''
         print(mail)
-        ans = otp(mail,message)
-        # ans1=otp(mail,message)
-        # print(ans)
+        ans = otp(mail, message)
         print(ans)
-        if ans=="invalid":
+        if ans == "invalid":
             return "invalid"
         if ans[0] == 'verified':
             # print(ans[1])
             # print(mail)
             print(ans[1])
             return mail
-            #print(f'returrning {ans[1]}')
 
-        # else:
-        #     print('Please input your email again.')
-        #     email()
+
 def fun():
     """main function to store user data in the reg table"""
-    print(Style.BRIGHT+'## REGISTRATION WINDOW ##'.center(60)+Style.RESET_ALL)
+    print(Style.BRIGHT + '## REGISTRATION WINDOW ##'.center(60) + Style.RESET_ALL)
     print('Dear Customer, please note our DTH service is only available in INDIA.')
     nm = name()
     uname = username()
     passwd = password()
     mb = mobile()
-    mail_id="invalid"
-    while mail_id=="invalid":
+    mail_id = "invalid"
+    while mail_id == "invalid":
         mail_id = email()
     print(mail_id)
-    print("hello")
     VC = vc()
 
     query = f"insert into reg values('{VC}','{nm}','{uname}','{mb}','{passwd}','{mail_id}')"
@@ -414,20 +407,11 @@ def fun():
     mycursor.execute(query1)
     mycon.commit()
 
-    print(Style.BRIGHT+'THANK YOU FOR REGISTERING!!'+Style.RESET_ALL)
+    print(Style.BRIGHT + 'THANK YOU FOR REGISTERING!!' + Style.RESET_ALL)
     print()
     print('Please select your SKYTOUCH pack...')
     display(uname)
     menu()
-    # ch = input('Do you want to register another user?(y/n)= ').lower()
-    # if ch == 'y':
-    #     fun()
-    # else:
-    #     menu()
-
-
-
-
 
 
 def mobile():
@@ -438,8 +422,6 @@ def mobile():
         if len(mb) == 10:
             if mb.isdigit():
                 mobile = mb
-                loop1 = "n"
-
                 return mobile
         else:
             print("Invalid mobile number")
@@ -464,7 +446,6 @@ def username():
                     break
             else:
                 user = uname
-                loop2 = "n"
                 return user
 
 
@@ -480,7 +461,6 @@ def password():
         if length >= 8:
             if pswd.isalnum():
                 passwd = pswd
-                loop3 = "n"
                 return passwd
             elif length > 20:
                 print("Password should be less than 20 characters")
@@ -518,9 +498,6 @@ def name():
             loop = "y"
         else:
             return name
-
-
-
 
 
 def basicplanhindi():
@@ -619,9 +596,10 @@ def premiumhindiplan():
     print(Style.BRIGHT + Fore.BLUE + "dhamaka offer".upper().center(55))
     print()
     print('NO ADS, JUST ENTERTAINMENT AND WORK!!!' + Style.RESET_ALL)
-    print(Fore.BLUE + '''Add more masala to your entertainment with SKYTOUCH\'s DHAMAKA active services. From jamming to the most popular music, or 
-    finding peace and faith in devotional songs, to setting high scores on our collection of incredibly fun games, 
-    there\'s always more you can do with your television.Now you get these amazing services for FREE!!!''')
+    print(Fore.BLUE + '''Add more masala to your entertainment with SKYTOUCH\'s DHAMAKA active services. 
+    From jamming to the most popular music, or finding peace and faith in devotional songs, to setting high scores on 
+    our collection of incredibly fun games, there\'s always more you can do with your television.Now you get these amazing
+    services for FREE!!!''')
     print()
 
     dhamaka = PrettyTable(
@@ -855,7 +833,7 @@ def specialoffer():
 
 def display(user):
     print()
-    print(Style.BRIGHT+'## PACK Display WINDOW ##'.center(60)+Style.RESET_ALL)
+    print(Style.BRIGHT + '## PACK Display WINDOW ##'.center(60) + Style.RESET_ALL)
     print()
     print("## Please select your language preference ##")
     print()
@@ -918,7 +896,7 @@ def display(user):
 
 
 def select(u):
-    print(Style.BRIGHT+ '## Pack SELECTION WINDOW ##'.center(60)+Style.RESET_ALL)
+    print(Style.BRIGHT + '## Pack SELECTION WINDOW ##'.center(60) + Style.RESET_ALL)
     print(f'Welcome {u}')
     print('Press 0 to view our Skytouch Combos')
     print('Press 1 to select Basic Hindi Plan.')
@@ -981,9 +959,9 @@ def selection_confirm(pack, price, U):
         mycon.commit()
         print('Press 1 to select recharge period')
         print('Else press any key to skip payment, you can pay later by logging into your account.')
-        ch=input('Enter your choice here: ')
-        if ch=='1':
-            Amount_payable = time_period(price,U)
+        ch = input('Enter your choice here: ')
+        if ch == '1':
+            Amount_payable = time_period(price, U)
             transaction(Amount_payable, U)
         else:
             query1 = f"update user_info set paid=0 where username='{U}';"
@@ -1071,7 +1049,7 @@ def guide():
 
 # modify pack
 def modify(u):
-    print(Style.BRIGHT+'## Pack MODIFICATION WINDOW ##'.center(60)+Style.RESET_ALL)
+    print(Style.BRIGHT + '## Pack MODIFICATION WINDOW ##'.center(60) + Style.RESET_ALL)
     print("Press 0 to return to your profile.")
     print('Press 1 to select Basic Hindi Plan.')
     print('Press 2 to select Premium Hindi Plan.')
@@ -1127,120 +1105,39 @@ def modify_confirm(pack, price, U):
     print('Press 0 to confirm your selection.')
     print('Press 1 to change your selection')
     ans1 = input('Enter your choice here: ')
+
     if ans1 == '0':
-        # amount = time_period(price,U)
         print(f'Your new pack is now {pack} !!!')
         query1 = f"select paid from user_info where username='{U}';"
         mycursor.execute(query1)
         data = mycursor.fetchall()
         Already_paid = data[0][0]
         mycon.commit()
-        Total_Amount= time_period(price,U)
-        Amount_payable= int(Total_Amount - Already_paid )
+        Total_Amount = time_period(price, U)
+        Amount_payable = int(Total_Amount - Already_paid)
         print("Amount Payable= Rs.", Amount_payable)
         pay_date = date.today().isoformat()
         if Amount_payable < 0:
-                print(f"Rs.{abs(Amount_payable)}  will be given within 7 days ".capitalize())
-                query = f"update user_info set pack='{pack}',paid={Total_Amount},price={price},pay_date='{pay_date}' where username='{U}';"
-                mycursor.execute(query)
-                mycon.commit()
-                welcome(U)
+            print(f"Rs.{abs(Amount_payable)}  will be given within 7 days ".capitalize())
+            query = f"update user_info set pack='{pack}',paid={Total_Amount},price={price},pay_date='{pay_date}' where username='{U}';"
+            mycursor.execute(query)
+            mycon.commit()
+            welcome(U)
         else:
             query = f"update user_info set pack='{pack}',price={price},pay_date='{pay_date}' where username='{U}';"
             mycursor.execute(query)
             mycon.commit()
             transaction(Amount_payable, U)
-        # print(balance)
-        # print(type(balance))
-        # ans="y"
-        # while ans=="y":
-        #     print(Style.BRIGHT + '## OFFERS FOR YOU! ##'.center(60) + Style.RESET_ALL)
-        #     print('On 3 month recharge get 7 Days extra!!')
-        #     print('On 6 month recharge get 15 Days extra!!')
-        #     print('On 1 year recharge get 30 Days extra!!')
-        #     print(
-        #         '###########################################################################################################')
-        #     print("Please select your Skytouch Recharge Time Period...")
-        #     print("Press 0 to recharge for 3 months")
-        #     print('Press 1 to recharge for 6 months')
-        #     print('Press 2 to recharge for 1 year')
-        #     ch = input('Enter your choice here: ')
-        #     if ch == '0':
-        #         ans = "n"
-        #         Total_amount = price * 3
-        #         print(f'Your total amount for 3 months will be = Rs. {Total_amount}')
-        #         final = int(Total_amount - balance)
-        #         print("Amount Payable= Rs.", final)
-        #         if final<0:
-        #             print(f"Rs.{abs(final)}  will be given within 7 days ".capitalize())
-        #             query = f"update user_info set pack='{pack}',paid={Total_amount},price={price} where username='{U}';"
-        #             mycursor.execute(query)
-        #             mycon.commit()
-        #             welcome(U)
-        #         else:
-        #             query = f"update user_info set pack='{pack}',price={price} where username='{U}';"
-        #             mycursor.execute(query)
-        #             mycon.commit()
-        #             transaction(final, U)
-        #
-        #
-        #
-        #     elif ch == '1':
-        #         ans = "n"
-        #         Total_amount = price * 6
-        #         print(f'Your total amount = Rs. {Total_amount}')
-        #         final = int(Total_amount - balance)
-        #         print("The amount that you have to pay is", final)
-        #         if final<0:
-        #             print("Your  amount will be given within 7 days ".capitalize())
-        #             query = f"update user_info set pack='{pack}',paid={Total_amount},price={price} where username='{U}';"
-        #             mycursor.execute(query)
-        #             mycon.commit()
-        #             welcome(U)
-        #         else:
-        #             query = f"update user_info set pack='{pack}',price={price} where username='{U}';"
-        #             mycursor.execute(query)
-        #             mycon.commit()
-        #             transaction(final, U)
-        #
-        #
-        #     elif ch == '2':
-        #         ans="n"
-        #         Total_amount = price * 12
-        #         print(f'Your total amount = Rs. {Total_amount}')
-        #         final = int(Total_amount - balance)
-        #         print("The amount that you have to pay is", final)
-        #         if final<0:
-        #             print("Your  amount will be given within 7 days ".capitalize())
-        #             query = f"update user_info set pack='{pack}',paid={Total_amount},price={price} where username='{U}';"
-        #             mycursor.execute(query)
-        #             mycon.commit()
-        #             welcome(U)
-        #         else:
-        #             query = f"update user_info set pack='{pack}',price={price} where username='{U}';"
-        #             mycursor.execute(query)
-        #             mycon.commit()
-        #             transaction(final, U)
-        #
-        #     else:
-        #         print('Please enter a valid choice!!!')
-        #         ans="y"
-
 
     elif ans1 == '1':
         modify(U)
     else:
         print('Please enter a valid choice.')
         modify_confirm(pack, price, U)
-    # print()
-    # print('*****************************************************************')
-    # print("Please login again to view the changes in your profile".upper())
-    # print('*************************************************************')
-    # print()
 
-def time_period(am,user):
-    # print('############################################################################################################')
-    print(Style.BRIGHT+'## OFFERS FOR YOU! ##'.center(60)+Style.RESET_ALL)
+
+def time_period(am, user):
+    print(Style.BRIGHT + '## OFFERS FOR YOU! ##'.center(60) + Style.RESET_ALL)
     print('On 3 month recharge get 7 Days extra!!')
     print('On 6 month recharge get 15 Days extra!!')
     print('On 1 year recharge get 30 Days extra!!')
@@ -1249,69 +1146,69 @@ def time_period(am,user):
     print("Press 0 to recharge for 3 months")
     print('Press 1 to recharge for 6 months')
     print('Press 2 to recharge for 1 year')
-    ch=input('Enter your choice here: ')
-    if ch=='0':
-        Total_amount=am*3
+    ch = input('Enter your choice here: ')
+    if ch == '0':
+        Total_amount = am * 3
         print(f'Your total amount = Rs. {Total_amount}')
-        ans=input('Press 1 to change your time period else press any key to proceed : ')
-        if ans=='1':
-            time_period(am,user)
+        ans = input('Press 1 to change your time period else press any key to proceed : ')
+        if ans == '1':
+            time_period(am, user)
+        else:
+            return Total_amount
+
+    elif ch == '1':
+        Total_amount = am * 6
+        print(f'Your total amount = Rs. {Total_amount}')
+        ans = input('Press 1 to change your time period else press any key to proceed : ')
+        if ans == '1':
+            time_period(am, user)
         else:
             return Total_amount
         #     transaction(Total_amount,user)
         # return Total_amount
-    elif ch=='1':
-        Total_amount = am*6
+    elif ch == '2':
+        Total_amount = am * 12
         print(f'Your total amount = Rs. {Total_amount}')
         ans = input('Press 1 to change your time period else press any key to proceed : ')
         if ans == '1':
-            time_period(am,user)
-        else:
-            return Total_amount
-        #     transaction(Total_amount,user)
-        # return Total_amount
-    elif ch=='2':
-        Total_amount = am*12
-        print(f'Your total amount = Rs. {Total_amount}')
-        ans = input('Press 1 to change your time period else press any key to proceed : ')
-        if ans == '1':
-            time_period(am,user)
+            time_period(am, user)
         else:
             return Total_amount
         #     transaction(Total_amount,user)
         # return Total_amount
     else:
         print('Please enter a valid choice!!!')
-        time_period(am,user)
+        time_period(am, user)
 
-def transaction(total_amount,User):
-    print(Style.BRIGHT+'#Make your payment HERE...##'.center(60)+Style.RESET_ALL)
+
+def transaction(total_amount, User):
+    print(Style.BRIGHT + '#Make your payment HERE...##'.center(60) + Style.RESET_ALL)
     print('Select the mode of payment')
     print('Press 1 for net banking.')
     print('Press 2 for Debit card.')
     print('Press 3 for UPI Autopay')
     print('Press 0 to skip payment. You can pay later by logging into your account.')
-    ch=input('Enter your choice here: ')
-    if ch=='1':
-        print(Style.BRIGHT+"## NET BANKING WINDOW ##".center(60)+Style.RESET_ALL)
+    ch = input('Enter your choice here: ')
+    if ch == '1':
+        print(Style.BRIGHT + "## NET BANKING WINDOW ##".center(60) + Style.RESET_ALL)
         ans = input('Press 1 to change mode of payment else press any key to proceed: ')
-        if ans=='1':
-            transaction(total_amount,User)
+        if ans == '1':
+            transaction(total_amount, User)
         else:
             net_banking()
             print(f'Your total amount is= Rs. {total_amount}')
             print(f'Press 1 to pay Rs. {total_amount}')
             print('Press any key to skip the transaction, you can pay later by logging into your account')
             Ans = input('Enter your choice here: ')
-            if Ans=='1':
+            if Ans == '1':
                 pay_date = date.today().isoformat()
-                query=f"update user_info set paid={total_amount},pay_date='{pay_date}' where username='{User}';"
+                query = f"update user_info set paid={total_amount},pay_date='{pay_date}' where username='{User}';"
                 mycursor.execute(query)
                 mycon.commit()
                 print('Please Wait, your payment is in process...')
                 print("...Do not refresh the page... ")
                 print('Payment made successfully!!')
-                payment_confirmation(total_amount,User)
+                payment_confirmation(total_amount, User)
             else:
                 query1 = f"select paid from user_info where username ='{User}'"
                 mycursor.execute(query1)
@@ -1325,15 +1222,11 @@ def transaction(total_amount,User):
 
                 menu()
 
-
-
-
-
-    elif ch=='2':
-        print(Style.BRIGHT+'## DEBIT CARD WINDOW ##'.center(60)+Style.RESET_ALL)
-        ans=input('Press 1 to change mode of payment else press any key to proceed: ')
-        if ans=='1':
-            transaction(total_amount,User)
+    elif ch == '2':
+        print(Style.BRIGHT + '## DEBIT CARD WINDOW ##'.center(60) + Style.RESET_ALL)
+        ans = input('Press 1 to change mode of payment else press any key to proceed: ')
+        if ans == '1':
+            transaction(total_amount, User)
         else:
 
             card_no()
@@ -1343,8 +1236,8 @@ def transaction(total_amount,User):
             print(f'Your total amount is= Rs. {total_amount}')
             print(f'Press 1 to pay Rs. {total_amount}')
             print('Press any key to skip the transaction, you can pay later by logging into your account')
-            Ans=input('Enter your choice here: ')
-            if Ans=='1':
+            Ans = input('Enter your choice here: ')
+            if Ans == '1':
                 pay_date = date.today().isoformat()
                 query = f"update user_info set paid={total_amount},pay_date='{pay_date}' where username='{User}';"
                 mycursor.execute(query)
@@ -1352,7 +1245,7 @@ def transaction(total_amount,User):
                 print('Please Wait, your payment is in process...')
                 print("...Do not refresh the page... ")
                 print('Payment made successfully!!')
-                payment_confirmation(total_amount,User)
+                payment_confirmation(total_amount, User)
             else:
                 query1 = f"select paid from user_info where username ='{User}'"
                 mycursor.execute(query1)
@@ -1365,14 +1258,14 @@ def transaction(total_amount,User):
                     pass
 
                 menu()
-    elif ch=="3":
-        print(Style.BRIGHT+'## UPI WINDOW ##'.center(60)+Style.RESET_ALL)
+    elif ch == "3":
+        print(Style.BRIGHT + '## UPI WINDOW ##'.center(60) + Style.RESET_ALL)
         print("UPI AutoPay is a new way to pay with UPI that will charge you automatically every month. "
               "That way you’ll never miss out on your shows and movies.")
         print("Now accepting: @upi, @paytm, @ibl, @axl, @ybl, @apl")
-        upi=input("enter you UPI Id= ".capitalize())
-        if len(upi)==14 or len(upi)==16:
-            if upi[10]=="@":
+        upi = input("enter you UPI Id= ".capitalize())
+        if len(upi) == 14 or len(upi) == 16:
+            if upi[10] == "@":
                 print("press 1 to confirm your payment.")
                 print('press any key to skip payment. You can pay later on by logging into your account.')
                 ans = input("enter your choice= ")
@@ -1392,9 +1285,9 @@ def transaction(total_amount,User):
                         print('Payment made successfully!!')
                         payment_confirmation(total_amount, User)
                     else:
-                        query1=f"select paid from user_info where username ='{User}'"
+                        query1 = f"select paid from user_info where username ='{User}'"
                         mycursor.execute(query1)
-                        Balance=mycursor.fetchone()[0]
+                        Balance = mycursor.fetchone()[0]
                         if Balance is None:
                             query = f"update user_info set paid=0;"
                             mycursor.execute(query)
@@ -1418,7 +1311,7 @@ def transaction(total_amount,User):
             else:
                 print('Please enter a valid choice!!')
                 transaction(total_amount, User)
-        elif ch=='0':
+        elif ch == '0':
             query1 = f"select paid from user_info where username ='{User}'"
             mycursor.execute(query1)
             Balance = mycursor.fetchone()[0]
@@ -1435,46 +1328,53 @@ def transaction(total_amount,User):
             transaction(total_amount, User)
 
 
-
 def card_no():
     card_number = input('CARD NUMBER: ')
-    if len(card_number)!=16:
+    if len(card_number) != 16:
         print('Invalid card number!!')
         card_no()
     else:
         return card_number
+
+
 def cardholder():
     name = input('CARDHOLDER NAME: ').upper()
-    if name=='' or name.isspace() or name.isdigit():
+    if name == '' or name.isspace() or name.isdigit():
         print("Invalid Cardholder name!!")
         cardholder()
     else:
         return name
+
+
 def expiry_date():
     exp_date = input('EXPIRY DATE (MM/YYYY): ')
-    if len(exp_date)!=7:
+    if len(exp_date) != 7:
         print('Invalid expiry date!!')
         expiry_date()
     else:
         return exp_date
+
+
 def cvv():
-    Cvv=input('CVV: ')
-    if len(Cvv)!=3:
+    Cvv = input('CVV: ')
+    if len(Cvv) != 3:
         print('Invalid CVV!!')
     else:
         return Cvv
 
+
 def contact():
-    print('You can contact us for your  queries, provide feedback and register your complaint at any time. We are pleased to help you! '.upper())
+    print(
+        'You can contact us for your  queries, provide feedback and register your complaint at any time. We are '
+        'pleased to help you! '.upper())
     print("We provide 24/7 service to our customers. Feel free to contact us".upper())
     print('Press 1 to know about our contact  details \nElse press any key to skip'.capitalize())
-    ch=input("Enter your choice= ")
-    if ch=="1":
+    ch = input("Enter your choice= ")
+    if ch == "1":
         print("You can contact us through our mail provided below:-")
-        print(Style.BRIGHT+"skytouch.clairie@gmail.com"+Style.RESET_ALL)
+        print(Style.BRIGHT + "skytouch.clairie@gmail.com" + Style.RESET_ALL)
     else:
         menu()
-    menu()
 
 
 def net_banking():
@@ -1513,19 +1413,20 @@ def net_banking():
         print('Please enter a valid choice!!')
         net_banking()
 
-def payment_confirmation(t_amount,u):
+
+def payment_confirmation(t_amount, u):
     from random import randint
     import smtplib
     from email.message import EmailMessage
 
-    reference_no=randint(10000000,99999999)
-    receipt_no=randint(1000,9999)
-    now=datetime.now()
-    t_date= now.strftime('%d %b %Y, %H:%M:%S')
+    reference_no = randint(10000000, 99999999)
+    receipt_no = randint(1000, 9999)
+    now = datetime.now()
+    t_date = now.strftime('%d %b %Y, %H:%M:%S')
 
-    query=f"select mail,vc from reg where username= '{u}';"
+    query = f"select mail,vc from reg where username= '{u}';"
     mycursor.execute(query)
-    mail,vc=mycursor.fetchall()[0]
+    mail, vc = mycursor.fetchall()[0]
     mycon.commit()
 
     msg = EmailMessage()
@@ -1537,17 +1438,19 @@ def payment_confirmation(t_amount,u):
     # Log in to your gmail account
     s.login("skytouch.clairie@gmail.com", "ceilotocco22")
 
-    MSG=' Payment Confirmation:SKYTOUCH '.center(60,'#')+'\n' \
-        'Thank you.' \
-        'Your payment request has been successfully recorded. Please quote your transaction reference number for' \
-        'any queries relating to this request.\n\n'+' Transaction Details '.center(60,'#')+'\n\n'\
-        'Transaction status : SUCCESS\n' \
-        f'Transaction reference no : {reference_no} \n' \
-        f'Transaction date and time: {t_date} \n' \
-        f'VC number= {vc} \n' \
-        f'Username= {u} \n' \
-        f'Receipt Number= {receipt_no} \n'\
-        f'Amount Paid= {t_amount} \n'
+    MSG = ' Payment Confirmation:SKYTOUCH '.center(60, '#') + '\n' \
+                                                              'Thank you.' \
+                                                              'Your payment request has been successfully recorded. ' \
+                                                              'Please quote your transaction reference number for' \
+                                                              'any queries relating to this request.\n\n' + ' Transaction Details '.center(
+        60, '#') + '\n\n' \
+                   'Transaction status : SUCCESS\n' \
+                   f'Transaction reference no : {reference_no} \n' \
+                   f'Transaction date and time: {t_date} \n' \
+                   f'VC number= {vc} \n' \
+                   f'Username= {u} \n' \
+                   f'Receipt Number= {receipt_no} \n' \
+                   f'Amount Paid= {t_amount} \n'
     print()
     print(MSG)
     msg.set_content(MSG)
@@ -1561,5 +1464,3 @@ def payment_confirmation(t_amount,u):
 
 
 menu()
-
-
