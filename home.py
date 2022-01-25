@@ -311,38 +311,6 @@ def change_pswd():
 
 # REGISTRATION FILE
 
-def fun():
-    """main function to store user data in the reg table"""
-    print(Style.BRIGHT+'## REGISTRATION WINDOW ##'.center(60)+Style.RESET_ALL)
-    print('Dear Customer, please note our DTH service is only available in INDIA.')
-    nm = name()
-    uname = username()
-    passwd = password()
-    mb = mobile()
-    mail_id = email()
-    # print(mail_id)
-    VC = vc()
-
-    query = f"insert into reg values('{VC}','{nm}','{uname}','{mb}','{passwd}','{mail_id}')"
-    query1 = f"insert into login_info values('{uname}','{passwd}')"
-    mycursor.execute(query)
-    mycursor.execute(query1)
-    mycon.commit()
-
-    print(Style.BRIGHT+'THANK YOU FOR REGISTERING!!'+Style.RESET_ALL)
-    print()
-    print('Please select your SKYTOUCH pack...')
-    display(uname)
-    menu()
-    # ch = input('Do you want to register another user?(y/n)= ').lower()
-    # if ch == 'y':
-    #     fun()
-    # else:
-    #     menu()
-
-
-
-
 def otp(mail,msg):
     """otp generation and verification program"""
     import smtplib
@@ -378,7 +346,8 @@ def otp(mail,msg):
         if iOTP == OTP:
             print('OTP VERIFIED...')
             # close smtp session
-            s.quit()
+            #s.quit()
+            print(mail)
             return 'verified', mail
         else:
             print('Invalid OTP!!!')
@@ -394,7 +363,10 @@ def otp(mail,msg):
 
 def email():
     """to input email and verify it."""
+
     mail = input("enter your e-mail: ")
+    print("hello",mail)
+
     if len(mail) == 0:
         print('Invalid Email.')
         email()
@@ -408,16 +380,55 @@ def email():
         ans = otp(mail,message)
         # ans1=otp(mail,message)
         # print(ans)
-        # print(ans[1])
+        print(ans)
+        if ans=="invalid":
+            return "invalid"
         if ans[0] == 'verified':
             # print(ans[1])
             # print(mail)
-            # print(ans[1])
-            # print(f'returrning {ans[1]}')
-            return ans[1]
-        else:
-            print('Please input your email again.')
-            email()
+            print(ans[1])
+            return mail
+            #print(f'returrning {ans[1]}')
+
+        # else:
+        #     print('Please input your email again.')
+        #     email()
+def fun():
+    """main function to store user data in the reg table"""
+    print(Style.BRIGHT+'## REGISTRATION WINDOW ##'.center(60)+Style.RESET_ALL)
+    print('Dear Customer, please note our DTH service is only available in INDIA.')
+    nm = name()
+    uname = username()
+    passwd = password()
+    mb = mobile()
+    mail_id="invalid"
+    while mail_id=="invalid":
+        mail_id = email()
+    print(mail_id)
+    print("hello")
+    VC = vc()
+
+    query = f"insert into reg values('{VC}','{nm}','{uname}','{mb}','{passwd}','{mail_id}')"
+    query1 = f"insert into login_info values('{uname}','{passwd}')"
+    mycursor.execute(query)
+    mycursor.execute(query1)
+    mycon.commit()
+
+    print(Style.BRIGHT+'THANK YOU FOR REGISTERING!!'+Style.RESET_ALL)
+    print()
+    print('Please select your SKYTOUCH pack...')
+    display(uname)
+    menu()
+    # ch = input('Do you want to register another user?(y/n)= ').lower()
+    # if ch == 'y':
+    #     fun()
+    # else:
+    #     menu()
+
+
+
+
+
 
 def mobile():
     """To input mobile no. of user."""
