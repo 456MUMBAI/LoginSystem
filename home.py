@@ -17,6 +17,8 @@ reg_data1 = mycursor.fetchall()
 
 
 def menu():
+    print()
+    print()
     print('WELCOME TO SKYTOUCH!!')
     print('Learn with Entertainment')
     print("Press 1 to login")
@@ -78,6 +80,7 @@ def home():
     else:
         print("THANK YOU FOR SHOWING INTEREST TO KNOW MORE ABOUT US")
         print("HAVE A NICE DAY")
+    menu()
 
 
 def vision():
@@ -1052,6 +1055,7 @@ def guide():
                  [Style.BRIGHT + 'Hungama', 'POGO', 'Disney', 'Nicklodeon', 'nick jr.', 'Cartoon Network', 'Disney XD',
                   'Baby\'s TV' + Style.RESET_ALL])
     print(d)
+    menu()
 
 
 # modify pack
@@ -1459,6 +1463,7 @@ def contact():
         print(Style.BRIGHT+"skytouch.clairie@gmail.com"+Style.RESET_ALL)
     else:
         menu()
+    menu()
 
 
 def net_banking():
