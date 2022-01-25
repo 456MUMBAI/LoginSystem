@@ -80,25 +80,25 @@ def home():
 def vision():
     print(Style.BRIGHT + Fore.RED + "VISION AND MISSION".center(90), Style.RESET_ALL)
     print(
-        Style.NORMAL + Fore.LIGHTYELLOW_EX + "Everything is rapidly changing so to keep pace with these changes, "
+        Style.NORMAL + Fore.MAGENTA + "Everything is rapidly changing so to keep pace with these changes, "
                                              "one has to make modifications in how things work, so they can be taken to"
                                              " the advanced level. ",
         Style.RESET_ALL)
     print(
-        Style.NORMAL + Fore.LIGHTYELLOW_EX + "With this mindset we have built our DTH which is not only  user-friendly"
+        Style.NORMAL + Fore.MAGENTA + "With this mindset we have built our DTH which is not only  user-friendly"
                                              "  but affordable.",
         Style.RESET_ALL)
     print(
-        Style.NORMAL + Fore.LIGHTYELLOW_EX + "We are keen on providing the best service to our customers. With SKYTOUCH"
+        Style.NORMAL + Fore.MAGENTA + "We are keen on providing the best service to our customers. With SKYTOUCH"
                                              " cable connection one can ensure their security.",
         Style.RESET_ALL)
     print(
-        Style.NORMAL + Fore.LIGHTYELLOW_EX + "Entertainment in one's life is something that can't be ignored, "
+        Style.NORMAL + Fore.MAGENTA + "Entertainment in one's life is something that can't be ignored, "
                                              "but due to high cost of tv packages and a busy schedule of people, "
                                              "many people are drained out of this joy.",
         Style.RESET_ALL)
     print(
-        Style.NORMAL + Fore.LIGHTYELLOW_EX + "Therefore, our DTH service has come up with low cost packages and 24/7 "
+        Style.NORMAL + Fore.MAGENTA + "Therefore, our DTH service has come up with low cost packages and 24/7 "
                                              "services",
         Style.RESET_ALL)
 
@@ -106,22 +106,22 @@ def vision():
 def core_values():
     print(Style.BRIGHT + Fore.GREEN + "OUR CORE VALUES".center(90), Style.RESET_ALL)
     print(
-        Style.NORMAL + Fore.LIGHTYELLOW_EX + "To work together effectively and efficiently realizing organisational "
+        Style.NORMAL + Fore.MAGENTA + "To work together effectively and efficiently realizing organisational "
                                              "objectives with a sense of shared accomplishment.",
         Style.RESET_ALL)
     print(
-        Style.NORMAL + Fore.LIGHTYELLOW_EX + "To act rapidly and deliver on responsibilities while anticipating and "
+        Style.NORMAL + Fore.MAGENTA + "To act rapidly and deliver on responsibilities while anticipating and "
                                              "responding to the dynamic environment.",
         Style.RESET_ALL)
     print(
-        Style.NORMAL + Fore.LIGHTYELLOW_EX + "To embrace each individual’s unique talents, diverse life choices and "
+        Style.NORMAL + Fore.MAGENTA + "To embrace each individual’s unique talents, diverse life choices and "
                                              "work styles. To be fair, humble, honest, transparent and ethical in conduct.",
         Style.RESET_ALL)
     print(
-        Style.NORMAL + Fore.LIGHTYELLOW_EX + "To generate, encourage and implement unconventional & novel ideas/technology"
+        Style.NORMAL + Fore.MAGENTA + "To generate, encourage and implement unconventional & novel ideas/technology"
                                              " continuously which fuel business growth.",
         Style.RESET_ALL)
-    print(Style.NORMAL + Fore.LIGHTYELLOW_EX + "Some core values that makes us different", Style.RESET_ALL)
+    print(Style.NORMAL + Fore.MAGENTA + "Some core values that makes us different", Style.RESET_ALL)
 
 
 def techandinfs():
