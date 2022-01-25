@@ -815,7 +815,8 @@ def mahafamilypack():
 
 def specialoffer():
     print(Style.BRIGHT + Fore.BLUE + '## SPECIAL OFFER ##'.center(45) + Style.RESET_ALL)
-    print(Style.BRIGHT + Fore.MAGENTA + "Purchase  any of our premium plans and get 50% off on NETFLIX basic plan!!")
+    print("{0}{1}Purchase  any of our premium plans and get 50% off on NETFLIX basic plan!!".format(Style.BRIGHT,
+                                                                                                    Fore.MAGENTA))
     print("Purchase our family plan and get 50% off on NETFLIX standard plan" + Style.RESET_ALL)
 
 
@@ -1358,13 +1359,8 @@ def contact():
         'pleased to help you! '.upper())
     print("We provide 24/7 service to our customers. Feel free to contact us".upper())
     print('Press 1 to know about our contact  details \nElse press any key to skip'.capitalize())
-    ch = input("Enter your choice= ")
-    if ch == "1":
-        print("You can contact us through our mail provided below:-")
-        print(Style.BRIGHT + "skytouch.clairie@gmail.com" + Style.RESET_ALL)
-
-    else:
-        menu()
+    print("You can contact us through our mail provided below:-")
+    print(Style.BRIGHT + "skytouch.clairie@gmail.com" + Style.RESET_ALL)
     menu()
 
 
