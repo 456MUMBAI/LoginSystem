@@ -1,4 +1,3 @@
-# hello
 import mysql.connector as ms
 from prettytable import PrettyTable
 from datetime import date, timedelta, datetime
@@ -56,14 +55,14 @@ def home():
     print("To know more about our core values. Press 2")
     print("To know more about our technology and infrastructure. Press 3")
     print("To know why you should select us as your DTH service provider. Press 4")
-    ch = int(input("Enter your choice here= "))
-    if ch == 1:
+    ch = input("Enter your choice here= ")
+    if ch == '1':
         vision()
-    if ch == 2:
+    elif ch == '2':
         core_values()
-    if ch == 3:
+    elif ch == '3':
         techandinfs()
-    if ch == 4:
+    elif ch == '4':
         whyus()
 
     else:
@@ -305,7 +304,6 @@ def change_pswd():
     else:
         print('Please enter a Valid VC number')
         change_pswd()
-    # menu()
 
 
 # REGISTRATION FILE
@@ -331,7 +329,6 @@ def otp(mail, msg):
     MSG['To'] = mail
 
     try:
-        # s.sendmail("skytouch.clairie@gmail.com", email, msg1)
         s.send_message(MSG)
         print("OTP sent successfully to registered mail id...")
     except:
@@ -344,7 +341,6 @@ def otp(mail, msg):
         if iOTP == OTP:
             print('OTP VERIFIED...')
             # close smtp session
-            # s.quit()
             print(mail)
             return 'verified', mail
         else:
@@ -364,8 +360,6 @@ def email():
     """to input email and verify it."""
 
     mail = input("enter your e-mail: ")
-    print("hello", mail)
-
     if len(mail) == 0:
         print('Invalid Email.')
         email()
@@ -375,15 +369,10 @@ def email():
     else:
         message = '''Dear User,
         Thank you for registering at SKYTOUCH. We have received your request for registration.'''
-        print(mail)
         ans = otp(mail, message)
-        print(ans)
         if ans == "invalid":
             return "invalid"
         if ans[0] == 'verified':
-            # print(ans[1])
-            # print(mail)
-            print(ans[1])
             return mail
 
 
@@ -398,7 +387,6 @@ def fun():
     mail_id = "invalid"
     while mail_id == "invalid":
         mail_id = email()
-    print(mail_id)
     VC = vc()
 
     query = f"insert into reg values('{VC}','{nm}','{uname}','{mb}','{passwd}','{mail_id}')"
@@ -1359,6 +1347,7 @@ def cvv():
     Cvv = input('CVV: ')
     if len(Cvv) != 3:
         print('Invalid CVV!!')
+        cvv()
     else:
         return Cvv
 
@@ -1373,8 +1362,10 @@ def contact():
     if ch == "1":
         print("You can contact us through our mail provided below:-")
         print(Style.BRIGHT + "skytouch.clairie@gmail.com" + Style.RESET_ALL)
+
     else:
         menu()
+    menu()
 
 
 def net_banking():
