@@ -319,7 +319,7 @@ def otp(mail, msg):
     # start TLS for E-mail security
     s.starttls()
     # Log in to your gmail account
-    s.login("skytouch.clairie@gmail.com", "ceilotocco22")
+    s.login("skytouch.clairie@gmail.com", "skytouch@2222")
     OTP = random.randint(1000, 9999)
     msg1 = msg + ' Your OTP for validation is= ' + str(OTP)
 
